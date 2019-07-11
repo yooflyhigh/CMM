@@ -13,7 +13,6 @@ public class Club{
     public static ArrayList<HashMap<String, String>> Club_Item_list;
     public Club(){
         ClubData ClubD = new ClubData();
-        ClubD.GetListData(ClubD.Temp);
         Club_Item_list = ClubD.Club_Item_list;
     }
 }

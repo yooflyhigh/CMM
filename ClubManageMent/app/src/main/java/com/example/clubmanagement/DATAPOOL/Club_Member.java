@@ -10,7 +10,6 @@ public class Club_Member {
     public static ArrayList<HashMap<String, String>> Club_Member_Item_list;
     public Club_Member(){
         Club_Member_Data ClubMember = new Club_Member_Data();
-        ClubMember.GetListData(ClubMember.Temp);
         Club_Member_Item_list = ClubMember.Club_Member_Item_list;
     }
 }

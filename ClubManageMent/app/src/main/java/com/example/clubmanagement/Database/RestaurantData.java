@@ -25,10 +25,10 @@ public class RestaurantData {
     public ArrayList<HashMap<String, String>> Restaurant_list;
     private String temp;
 
-    public RestaurantData(){
+    public RestaurantData() {
         JSON_Restaurant = null;
         Restaurant_list = new ArrayList<>();
-        getData("http://192.168.0.12/RESTAURANT.php"); //http://[현재자신의아이피]/PHP_connection.php
+        getData("http://210.115.230.212:80/RESTAURANT.php"); //http://[현재자신의아이피]/PHP_connection.php
     }
 
     public ArrayList<HashMap<String, String>> GetListData(String temp) {
@@ -52,9 +52,11 @@ public class RestaurantData {
         }
         return Restaurant_list;
     }
-    public void ClearListData(){
+
+    public void ClearListData() {
         Restaurant_list.clear();
     }
+
     public void getData(String url) {
         class GetDataJSON extends AsyncTask<String, Void, String> {
             @Override
@@ -82,15 +84,18 @@ public class RestaurantData {
                     //사용했던 것도 다 닫아줌
                     bufferedReader.close();
                     httpURLConnection.disconnect();
-                    Temp =  stringBuilder.toString().trim();
+                    Temp = stringBuilder.toString().trim();
                     return Temp;//trim은 앞뒤의 공백을 제거함
 
                 } catch (Exception e) {
                     return null;
                 }
             }
+
             @Override
-            protected void onPostExecute(String result) {myJSON = result; }
+            protected void onPostExecute(String result) {
+                myJSON = result;
+            }
         }
         GetDataJSON g = new GetDataJSON();
         g.execute(url);

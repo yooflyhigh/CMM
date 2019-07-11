@@ -3,7 +3,6 @@ package com.example.clubmanagement.Fragment;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.support.v4.app.Fragment;
@@ -31,12 +30,15 @@ import static java.lang.Thread.sleep;
 public class PageOneFragment extends Fragment {
     private ListView listview;
     private ListViewAdapter adapter;
-    private int[] img = {R.drawable.hallym,R.drawable.light,R.drawable.eleven,R.drawable.noname,R.drawable.video,R.drawable.cloud,R.drawable.general,R.drawable.wings,R.drawable.heart,R.drawable.shop,R.drawable.triangle,R.drawable.waterdrop};
-    private String[] ClubName = {"Hallym","팬타곤","일레븐","노네임","영상틀","한빛","힙합PD","CCC","씨애랑","VIP","불꽃슛","음감실"};
-    private String[] Context = {"한림대학교를 자랑하기 위해서 만들었습니다.","공대의 농구 실력을 위해서 만들었습니다.","공학 공부를 위해서 만들었습니다.","공대의 축구 실력을 위해서 만들었습니다.","영상 제작 동아리", "사진 동아리","힙합 노래 동아리","교회 동아리","공대 학술 동아리","전자공 학술 동아리","축구 동아리","음악 감상 동아리"};
+    HashMap<String, String> Club_Item = new HashMap<String, String>();
+    ArrayList<HashMap<String, String>> Club_Item_list;
+    HashMap<String, String> Club_Member_Item = new HashMap<String, String>();
+    ArrayList<HashMap<String, String>> Club_Member_Item_list;
+    String[] NameArr;
     int count;
 
-   // ClubData Cd = new ClubData();
+     ClubData Cd = new ClubData();
+     Club_Member_Data Cm = new Club_Member_Data();
     //Club_Member_Data CMD = new Club_Member_Data();
     Image_File ht;
     public static PageOneFragment newInstance() {
@@ -53,30 +55,47 @@ public class PageOneFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_page_one, container, false);
         adapter = new ListViewAdapter();
         listview = (ListView) v.findViewById(R.id.List_view);
-        DataInput();
+        listview.setAdapter(adapter);
 
+        //변수 초기화
+        DataInput();
+        //어뎁터 할당
         return v;
     }
 
     private void DataInput(){
         listview.setAdapter(adapter);
+
+        //Cd.GetListData();
+        Club_Item_list = Cd.Club_Item_list;
+        Club_Member_Item_list = Cm.Club_Member_Item_list;
+        NameArr = new String[Club_Item_list.size()];
         count = 0;
-       // for(int i = 0; i<4;i++){
-            adapter.addVO(ContextCompat.getDrawable(this.getActivity() ,img[0]),ClubName[0],Context[0]);
-            adapter.addVO(ContextCompat.getDrawable(this.getActivity(), img[10]), ClubName[10], Context[10]);
-            adapter.addVO(ContextCompat.getDrawable(this.getActivity(), img[4]), ClubName[4], Context[4]);
-        //}
+
+        for (int i = 0; i < Club_Member_Item_list.size(); i++) {
+            Club_Member_Item = Cm.Club_Member_Item_list.get(i);
+            if(Club_Member_Item.get("STUDENT_ID").equals(Club_UserID.UserID)){
+                Club_Item = Club_Item_list.get(i);
+                if(Club_Member_Item.get("CLUB_ID").equals(Club_Item.get("CLUB_ID"))){
+                    NameArr[count++] = Club_Item.get("CLUB_ID");
+                    String url = Club_Item.get("INTRO_FILE_NM");
+                    ht = new Image_File(url);
+                    ht.run();
+                    try {
+                        sleep(200);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    adapter.addVO(new BitmapDrawable(getResources(), ht.bitmap), Club_Item.get("CLUB_NM"), Club_Item.get("INTRO_CONT"));
+                }
+            }
+        }
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(position == 0) {
-                    ClubPositon.position = 0;
-                }else if(position == 1){
-                    ClubPositon.position = 10;
-                }else if(position == 2){
-                    ClubPositon.position = 4;
-                }
+                Toast.makeText(getContext(), (position+1) +"번째 리스트가 클릭되었습니다.", Toast.LENGTH_SHORT).show();
+                //ClubPositon.position = NameArr[position];
                 startActivity(new Intent(getActivity(), Club_page.class));
             }
         });
