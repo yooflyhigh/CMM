@@ -105,10 +105,6 @@ public class CNT_Club {
         return Club_Item_list;
     }
 
-    public void ClearListData() {
-        Club_Item_list.clear();
-    }
-
     public String getData(String uri) {
         BufferedReader bufferedReader = null;
         try {

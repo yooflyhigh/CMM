@@ -112,10 +112,6 @@ public class CNT_Club_Member {
         return Club_Member_Item_list;
     }
 
-    public void ClearListData() {
-        Club_Member_Item_list.clear();
-    }
-
     public String getData(String uri) {
         BufferedReader bufferedReader = null;
         try {

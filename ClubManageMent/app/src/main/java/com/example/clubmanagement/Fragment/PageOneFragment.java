@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.clubmanagement.Adapter.ListViewAdapter;
+import com.example.clubmanagement.ClubPage.ClubPoster;
 import com.example.clubmanagement.ClubPage.Club_page;
+import com.example.clubmanagement.ListVO.ListVO;
 import com.example.clubmanagement.Profile.UserID;
 import com.example.clubmanagement.DataBase.DBConnect.ImageURL.CNT_Image_File;
 import com.example.clubmanagement.R;
@@ -26,11 +28,7 @@ import static java.lang.Thread.sleep;
 public class PageOneFragment extends Fragment {
     private ListView listview;
     private ListViewAdapter adapter;
-    HashMap<String, String> Club;
-    HashMap<String, String> Member;
-    String[] NameArr;
-    int count;
-    CNT_Image_File Club_Poster;
+    CNT_Image_File ImageDown;
 
     public static PageOneFragment newInstance() {
         Bundle args = new Bundle();
@@ -54,30 +52,27 @@ public class PageOneFragment extends Fragment {
 
     private void ShowList() {
         try {
-            sleep(1000);
+            sleep(200);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         listview.setAdapter(adapter);
-
-        NameArr = new String[Club_Item_list.size()];
-        count = 0;
-
+        HashMap<String, String> Member;
+        HashMap<String, String> Club;
         for (int i = 0; i < Club_Member_Item_list.size(); i++) {
             Member = Club_Member_Item_list.get(i);
             if (Member.get("STUDENT_ID").equals(UserID.UserID)) {
                 Club = Club_Item_list.get(i);
                 if (Member.get("CLUB_ID").equals(Club.get("CLUB_ID"))) {
-                    NameArr[count++] = Club.get("CLUB_ID");
                     String url = Club.get("INTRO_FILE_NM");
-                    Club_Poster = new CNT_Image_File(url);
-                    Club_Poster.run();
+                    ImageDown = new CNT_Image_File(url);
+                    ImageDown.run();
                     try {
-                        sleep(200);
+                        sleep(100);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    adapter.addVO(new BitmapDrawable(getResources(), Club_Poster.bitmap), Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
+                    adapter.addVO(new BitmapDrawable(getResources(), ImageDown.bitmap), Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
                 }
             }
         }
@@ -85,11 +80,10 @@ public class PageOneFragment extends Fragment {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getContext(), (position + 1) + "번째 리스트가 클릭되었습니다.", Toast.LENGTH_SHORT).show();
-                //ClubPositon.position = NameArr[position];
+                ListVO Vo = (ListVO) (listview.getAdapter().getItem(position));
+                ClubPoster.image = (BitmapDrawable) Vo.getImg();
                 startActivity(new Intent(getActivity(), Club_page.class));
             }
         });
-
     }
 }

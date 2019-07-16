@@ -52,9 +52,6 @@ public class CNT_Restaurant {
         }
         return Restaurant_list;
     }
-    public void ClearListData() {
-        Restaurant_list.clear();
-    }
 
     public String getData(String uri) {
         BufferedReader bufferedReader = null;

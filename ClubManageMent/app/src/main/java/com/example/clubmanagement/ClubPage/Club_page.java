@@ -14,7 +14,6 @@ import com.example.clubmanagement.Restaurant.Restaurant_Activity;
 import static java.lang.Thread.sleep;
 
 public class Club_page extends AppCompatActivity {
-    private int[] img = {R.drawable.hallym,R.drawable.light,R.drawable.eleven,R.drawable.noname,R.drawable.video,R.drawable.cloud,R.drawable.general,R.drawable.wings,R.drawable.heart,R.drawable.shop,R.drawable.triangle,R.drawable.waterdrop};
     //HashMap<String, String> Club_Item = new HashMap<String, String>();
     //ArrayList<HashMap<String, String>> Club_Item_list;
     Button button1;
@@ -29,8 +28,11 @@ public class Club_page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.clubpage);
        // for (int i = 0; i < 4; i++) {
-            ImageView imageView1 = (ImageView) findViewById(R.id.imageView) ;
-            imageView1.setImageResource(img[ClubPositon.position]);
+            ImageView ClubImage = (ImageView) findViewById(R.id.imageView) ;
+            //ClubPoster.setImageResource(ClubPoster.image);
+
+        ClubImage.setImageBitmap(ClubPoster.image.getBitmap());
+
       //  }
         /*
         Club_Item_list = Club.Club_Item_list;
@@ -46,8 +48,8 @@ public class Club_page extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                ImageView imageView1 = (ImageView) findViewById(R.id.imageView) ;
-                imageView1.setImageBitmap(ht.bitmap);
+                ImageView ClubPoster = (ImageView) findViewById(R.id.imageView) ;
+                ClubPoster.setImageBitmap(ht.bitmap);
             }
         }
 */

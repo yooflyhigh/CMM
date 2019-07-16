@@ -13,31 +13,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-//import android.widget.Toast;
 
 import com.example.clubmanagement.Adapter.ListViewAdapter;
 import com.example.clubmanagement.Apply.ApplyActivity;
 import com.example.clubmanagement.ClubPage.ClubPoster;
+import com.example.clubmanagement.DataBase.DBConnect.ImageURL.CNT_Image_File;
 import com.example.clubmanagement.ListVO.ListVO;
 import com.example.clubmanagement.R;
 
-import static android.app.Activity.RESULT_OK;
+import java.util.HashMap;
+
 import static java.lang.Thread.sleep;
+import static com.example.clubmanagement.DataBase.DataPool.Club.Club_Item_list;
 
 public class PageThreeFragment extends Fragment {
     private ListView listview;
     private ListViewAdapter adapter;
-    int Code = 0;
-    private int[] img = {R.drawable.hallym,R.drawable.light,R.drawable.eleven,R.drawable.noname,R.drawable.video,R.drawable.cloud,R.drawable.general,R.drawable.wings,R.drawable.heart,R.drawable.shop,R.drawable.triangle,R.drawable.waterdrop};
-    private String[] ClubName = {"Hallym","팬타곤","일레븐","노네임","영상틀","한빛","힙합PD","CCC","씨애랑","VIP","불꽃슛","음감실"};
-    private String[] Context = {"한림대학교를 자랑하기 위해서 만들었습니다.","공대의 농구 실력을 위해서 만들었습니다.","공학 공부를 위해서 만들었습니다.","공대의 축구 실력을 위해서 만들었습니다.","영상 제작 동아리", "사진 동아리","힙합 노래 동아리","교회 동아리","공대 학술 동아리","전자공 학술 동아리","축구 동아리","음악 감상 동아리"};
-    //HashMap<String, String> Club_Item = new HashMap<String, String>();
-    //ArrayList<HashMap<String, String>> Club_Item_list;
-    TextView txtResult;
     Button applyUp;
-    ClubPoster Cp;
+    CNT_Image_File ImageDown;
     boolean flag = false;
     int Pos = Integer.MAX_VALUE ;
 
@@ -61,9 +55,8 @@ public class PageThreeFragment extends Fragment {
         checkSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Code = position;
                 adapter = new ListViewAdapter();
-                DataInput(Code);
+                DataInput(position);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -72,11 +65,55 @@ public class PageThreeFragment extends Fragment {
 
         listview = (ListView) v.findViewById(R.id.List_view);
         ApplyStart(v);
+
         return v;
+    }
+    private void DataInput(int Code) {
+        listview.setAdapter(adapter);
+        HashMap<String, String> Club;
+        for (int i = 0; i < Club_Item_list.size(); i++) {
+            Club = Club_Item_list.get(i);
+            String url = Club.get("INTRO_FILE_NM");
+            ImageDown = new CNT_Image_File(url);
+            ImageDown.run();
+            try {
+                sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            ClubPoster.image = new BitmapDrawable(getResources(),ImageDown.bitmap);
+            if (Club.get("CLUB_GB_CD").equals("1002") && Code == 0) {
+                adapter.addVO(ClubPoster.image, Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
+            } else if (Club.get("CLUB_GB_CD").equals("1002") && Code == 1) {
+                if (Club.get("CLUB_AT_CD").equals("2001")) {
+                    adapter.addVO(ClubPoster.image, Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
+                }
+            } else if (Club.get("CLUB_GB_CD").equals("1002") && Code == 2) {
+                if (Club.get("CLUB_AT_CD").equals("2002")) {
+                    adapter.addVO(ClubPoster.image, Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
+                }
+            } else if (Club.get("CLUB_GB_CD").equals("1002") && Code == 3) {
+                if (Club.get("CLUB_AT_CD").equals("2003")) {
+                    adapter.addVO(ClubPoster.image, Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
+                }
+            } else if (Club.get("CLUB_GB_CD").equals("1002") && Code == 4) {
+                if (Club.get("CLUB_AT_CD").equals("2004")) {
+                    adapter.addVO(ClubPoster.image, Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
+                }
+            } else if (Club.get("CLUB_GB_CD").equals("1002") && Code == 5) {
+                if (Club.get("CLUB_AT_CD").equals("2005")) {
+                    adapter.addVO(ClubPoster.image, Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
+                }
+            } else if (Club.get("CLUB_GB_CD").equals("1002") && Code == 6) {
+                if (Club.get("CLUB_AT_CD").equals("2006")) {
+                    adapter.addVO(ClubPoster.image, Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
+                }
+            }
+        }
     }
 
     private void ApplyStart(final View v) {
-
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -90,7 +127,7 @@ public class PageThreeFragment extends Fragment {
             public void onClick(View view) {
                 if(Pos < listview.getCount()){
                     ListVO Vo = (ListVO)(listview.getAdapter().getItem(Pos));
-                    Cp.image = (BitmapDrawable) Vo.getImg();
+                    ClubPoster.image = (BitmapDrawable) Vo.getImg();
                     Intent intent = new Intent(getActivity(), ApplyActivity.class);
                     startActivityForResult(intent, 1);
                 }
@@ -100,93 +137,4 @@ public class PageThreeFragment extends Fragment {
             }
         });
     }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 1) {
-            if (resultCode == RESULT_OK) {
-                //데이터 받기
-                String result = data.getStringExtra("result");
-                txtResult.setText(result);
-            }
-        }
-    }
-    private void DataInput(int Code) {
-        listview.setAdapter(adapter);
-        if(flag) {
-            adapter.getClass();
-        }
-        flag = true;
-        if(Code == 0) {
-            adapter.addVO(ContextCompat.getDrawable(this.getActivity(), img[10]), ClubName[10], Context[10]);
-            adapter.addVO(ContextCompat.getDrawable(this.getActivity(), img[4]), ClubName[4], Context[4]);
-            adapter.addVO(ContextCompat.getDrawable(this.getActivity(), img[5]), ClubName[5], Context[5]);
-            adapter.addVO(ContextCompat.getDrawable(this.getActivity(), img[6]), ClubName[6], Context[6]);
-            adapter.addVO(ContextCompat.getDrawable(this.getActivity(), img[11]), ClubName[11], Context[11]);
-            adapter.addVO(ContextCompat.getDrawable(this.getActivity(), img[7]), ClubName[7], Context[7]);
-            adapter.addVO(ContextCompat.getDrawable(this.getActivity(), img[0]), ClubName[0], Context[0]);
-        }else if(Code == 2){
-            adapter.addVO(ContextCompat.getDrawable(this.getActivity(), img[10]), ClubName[10], Context[10]);
-        }else if(Code == 4) {
-            adapter.addVO(ContextCompat.getDrawable(this.getActivity(), img[4]), ClubName[4], Context[4]);
-            adapter.addVO(ContextCompat.getDrawable(this.getActivity(), img[5]), ClubName[5], Context[5]);
-            adapter.addVO(ContextCompat.getDrawable(this.getActivity(), img[6]), ClubName[6], Context[6]);
-            adapter.addVO(ContextCompat.getDrawable(this.getActivity(), img[11]), ClubName[11], Context[11]);
-        }else if(Code == 5){
-            adapter.addVO(ContextCompat.getDrawable(this.getActivity(), img[7]), ClubName[7], Context[7]);
-        }else if(Code == 6){
-            adapter.addVO(ContextCompat.getDrawable(this.getActivity(), img[0]), ClubName[0], Context[0]);
-        }
-    }
-
-/*
-    private void DataInput(int Code) {
-        listview.setAdapter(adapter);
-        if(flag) {
-            adapter.getClass();
-            Club_Item_list.clear();
-        }
-        flag = true;
-        Club_Item_list = Club.Club_Item_list;
-        for (int i = 0; i < Club_Item_list.size(); i++) {
-            Club_Item = Club_Item_list.get(i);
-            String url = Club_Item.get("INTRO_FILE_NM");
-            CNT_Image_File Club_Poster = new CNT_Image_File(url);
-            Club_Poster.run();
-            try {
-                sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            Cp.image = new BitmapDrawable(getResources(),Club_Poster.bitmap);
-            if (Club_Item.get("CLUB_GB_CD").equals("1002") && Code == 0) {
-                adapter.addVO(Cp.image, Club_Item.get("CLUB_NM"), Club_Item.get("INTRO_CONT"));
-            } else if (Club_Item.get("CLUB_GB_CD").equals("1002") && Code == 1) {
-                if (Club_Item.get("CLUB_AT_CD").equals("2001")) {
-                    adapter.addVO(Cp.image, Club_Item.get("CLUB_NM"), Club_Item.get("INTRO_CONT"));
-                }
-            } else if (Club_Item.get("CLUB_GB_CD").equals("1002") && Code == 2) {
-                if (Club_Item.get("CLUB_AT_CD").equals("2002")) {
-                    adapter.addVO(Cp.image, Club_Item.get("CLUB_NM"), Club_Item.get("INTRO_CONT"));
-                }
-            } else if (Club_Item.get("CLUB_GB_CD").equals("1002") && Code == 3) {
-                if (Club_Item.get("CLUB_AT_CD").equals("2003")) {
-                    adapter.addVO(Cp.image, Club_Item.get("CLUB_NM"), Club_Item.get("INTRO_CONT"));
-                }
-            } else if (Club_Item.get("CLUB_GB_CD").equals("1002") && Code == 4) {
-                if (Club_Item.get("CLUB_AT_CD").equals("2004")) {
-                    adapter.addVO(Cp.image, Club_Item.get("CLUB_NM"), Club_Item.get("INTRO_CONT"));
-                }
-            } else if (Club_Item.get("CLUB_GB_CD").equals("1002") && Code == 5) {
-                if (Club_Item.get("CLUB_AT_CD").equals("2005")) {
-                    adapter.addVO(Cp.image, Club_Item.get("CLUB_NM"), Club_Item.get("INTRO_CONT"));
-                }
-            } else if (Club_Item.get("CLUB_GB_CD").equals("1002") && Code == 6) {
-                if (Club_Item.get("CLUB_AT_CD").equals("2006")) {
-                    adapter.addVO(Cp.image, Club_Item.get("CLUB_NM"), Club_Item.get("INTRO_CONT"));
-                }
-            }
-        }
-    }*/
 }

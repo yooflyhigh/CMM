@@ -74,9 +74,6 @@ public class CNT_Student {
         }
         return Student_Item_list;
     }
-    public void ClearListData(){
-        Student_Item_list.clear();
-    }
 
     public String getData(String uri) {
         BufferedReader bufferedReader = null;
