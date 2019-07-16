@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.login_activity);
-
+//Todo: 자동로그인 구현하기!
             loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
                     .get(LoginViewModel.class);
 
