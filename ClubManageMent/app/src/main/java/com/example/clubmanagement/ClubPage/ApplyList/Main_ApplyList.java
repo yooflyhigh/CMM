@@ -10,14 +10,14 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.clubmanagement.System.Adapter.ApplyListAdapter;
+import com.example.clubmanagement.System.Adapter.ListViewAdapter.ApplyList_ListAdapter;
 import com.example.clubmanagement.R;
 
 import static android.app.PendingIntent.getActivity;
 
 public class Main_ApplyList extends AppCompatActivity implements View.OnClickListener{
     private ListView listview ;
-    private ApplyListAdapter adapter;
+    private ApplyList_ListAdapter adapter;
     private int[] Apply_Img= { R.drawable.check,R.drawable.check,R.drawable.box,R.drawable.box,R.drawable.check,R.drawable.check,R.drawable.x,R.drawable.x,R.drawable.box,R.drawable.check,R.drawable.box};
     private String[] Apply_name= {"권기호","정호준","김성태", "흑운장", "보겸", "아이서", "김균모", "유지형", "정지민", "이편한", "아디소"};
     private String[] Apply_major = {"빅데이터","스마트IOT","일본학과","법학과","바이오메디컬","영어영문학곽","빅데이터","콘텐츠IT","빅데이터","콘텐츠IT","빅데이터"};
@@ -28,10 +28,10 @@ public class Main_ApplyList extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.apply_list);
+        setContentView(R.layout.applylist_main);
 
         //변수 초기화
-        adapter = new ApplyListAdapter();
+        adapter = new ApplyList_ListAdapter();
         listview = (ListView) findViewById(R.id.Apply_ListView);
 
         //어뎁터 할당

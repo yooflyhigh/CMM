@@ -1,4 +1,4 @@
-package com.example.clubmanagement.System.Adapter;
+package com.example.clubmanagement.System.Adapter.ListViewAdapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,8 +12,7 @@ import com.example.clubmanagement.System.ListVO.ListVO_Restaurant;
 import com.example.clubmanagement.R;
 import java.util.ArrayList;
 
-public class ListRestaurantAdapter extends BaseAdapter {
-    public Button number;
+public class Restaurant_ListAdapter extends BaseAdapter {
     private ArrayList<ListVO_Restaurant> listVO_Res = new ArrayList<ListVO_Restaurant>();
 
     @Override
@@ -24,13 +23,11 @@ public class ListRestaurantAdapter extends BaseAdapter {
     // ** 이 부분에서 리스트뷰에 데이터를 넣어줌 **
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        //postion = ListView의 위치      /   첫번째면 position = 0
-        final int pos = position;
         final Context context = parent.getContext();
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.restaurant_listview, parent, false);
+            convertView = inflater.inflate(R.layout.restaurant_list_adapter, parent, false);
         }
 
         TextView name = (TextView) convertView.findViewById(R.id.store);
@@ -43,7 +40,6 @@ public class ListRestaurantAdapter extends BaseAdapter {
 
         return convertView;
     }
-
 
     @Override
     public long getItemId(int position) {

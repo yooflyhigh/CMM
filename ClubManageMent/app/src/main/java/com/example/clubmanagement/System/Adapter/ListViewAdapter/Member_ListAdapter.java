@@ -1,4 +1,4 @@
-package com.example.clubmanagement.System.Adapter;
+package com.example.clubmanagement.System.Adapter.ListViewAdapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,7 +13,7 @@ import com.example.clubmanagement.R;
 
 import java.util.ArrayList;
 
-public class ListMemberAdapter extends BaseAdapter {
+public class Member_ListAdapter extends BaseAdapter {
 
     private ArrayList<ListVO_Member> listVO_Member = new ArrayList<ListVO_Member>() ;
 
@@ -29,10 +29,9 @@ public class ListMemberAdapter extends BaseAdapter {
         final int pos = position;
         final Context context = parent.getContext();
 
-
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.club_member_listview, parent, false);
+            convertView = inflater.inflate(R.layout.member_list_adapter, parent, false);
         }
 
         TextView staff = (TextView) convertView.findViewById(R.id.staff) ;
@@ -47,9 +46,6 @@ public class ListMemberAdapter extends BaseAdapter {
         name.setText(listViewMember.getName());
         major.setText(listViewMember.getMajor());
         phoneNM.setText(listViewMember.getPhoneNM());
-
-
-        //리스트뷰 클릭 이벤트
 
         return convertView;
     }

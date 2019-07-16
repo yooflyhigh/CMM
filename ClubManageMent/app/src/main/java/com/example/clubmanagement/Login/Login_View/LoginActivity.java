@@ -19,7 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.clubmanagement.System.Fragment.FragmentStart;
+import com.example.clubmanagement.System.Fragment.Fragment_Start;
 import com.example.clubmanagement.Login.Auto_Login.SaveSharedPreference;
 import com.example.clubmanagement.R;
 
@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_login);
+            setContentView(R.layout.login_activity);
 
             loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
                     .get(LoginViewModel.class);
@@ -57,8 +57,8 @@ public class LoginActivity extends AppCompatActivity {
                         passwordEditText.getText().toString());
                 */
                 //updateUiWithUser(new LoggedInUserView(SaveSharedPreference.getUserName(LoginActivity.this)));
-                //startActivity(new Intent(LoginActivity.this, FragmentStart.class));
-                //startActivity(new Intent(LoginActivity.this, FragmentStart.class));
+                //startActivity(new Intent(LoginActivity.this, Fragment_Start.class));
+                //startActivity(new Intent(LoginActivity.this, Fragment_Start.class));
             }
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     SaveSharedPreference.setUserName(LoginActivity.this, usernameEditText.getText().toString());
                     SaveSharedPreference.setUserPass(LoginActivity.this,passwordEditText.getText().toString());
-                    startActivity(new Intent(LoginActivity.this, FragmentStart.class));
+                    startActivity(new Intent(LoginActivity.this, Fragment_Start.class));
 
                 }
             }

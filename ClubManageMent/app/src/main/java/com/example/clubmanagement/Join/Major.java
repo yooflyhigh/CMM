@@ -14,10 +14,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.clubmanagement.System.Adapter.ListViewAdapter;
+import com.example.clubmanagement.System.Adapter.ListViewAdapter.Fragment_List_Adapter;
 import com.example.clubmanagement.ClubPage.Home.ClubPoster;
 import com.example.clubmanagement.DataBase.DBConnect.ImageURL.CNT_Image_File;
-import com.example.clubmanagement.System.ListVO.ListVO;
+import com.example.clubmanagement.System.ListVO.ListVO_Frg;
 import com.example.clubmanagement.R;
 
 import java.util.HashMap;
@@ -27,7 +27,7 @@ import static java.lang.Thread.sleep;
 
 public class Major extends Fragment {
     public ListView listview;
-    private ListViewAdapter adapter;
+    private Fragment_List_Adapter adapter;
 
     Button applyUp;
     int Pos = Integer.MAX_VALUE;
@@ -44,7 +44,7 @@ public class Major extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //메인 시작
-        View v = inflater.inflate(R.layout.fragment_page_two, container, false);
+        View v = inflater.inflate(R.layout.frg_major_list, container, false);
 
         //스피너
         Spinner checkSpinner = (Spinner) v.findViewById(R.id.spinner_Check);
@@ -56,7 +56,7 @@ public class Major extends Fragment {
             //스피너 컨트롤
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                adapter = new ListViewAdapter();
+                adapter = new Fragment_List_Adapter();
                 ShowList(position);
             }
 
@@ -133,7 +133,7 @@ public class Major extends Fragment {
             @Override
             public void onClick(View view) {
                 if (Pos < listview.getCount()) {
-                    ListVO Vo = (ListVO) (listview.getAdapter().getItem(Pos));
+                    ListVO_Frg Vo = (ListVO_Frg) (listview.getAdapter().getItem(Pos));
                     ClubPoster.image = (BitmapDrawable) Vo.getImg();
                     Intent intent = new Intent(getActivity(), JoinPopUp.class);
                     startActivityForResult(intent, 1);

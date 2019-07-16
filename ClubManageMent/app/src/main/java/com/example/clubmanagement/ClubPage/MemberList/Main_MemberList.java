@@ -4,14 +4,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
-import com.example.clubmanagement.System.Adapter.ListMemberAdapter;
+import com.example.clubmanagement.System.Adapter.ListViewAdapter.Member_ListAdapter;
 import com.example.clubmanagement.R;
 
 import static java.lang.Thread.sleep;
 
 public class Main_MemberList extends AppCompatActivity {
     private ListView listview;
-    private ListMemberAdapter adapter;
+    private Member_ListAdapter adapter;
     private String[] staff = {"회장", "부회장", "총무", "회원", "회원", "회원", "회원", "회원", "회원", "회원", "회원"};
     private String[] name = {"정균모", "이호명", "이지아", "김중형", "김중형", "김중형", "김중형", "김중형", "김중형", "김중형", "김중형"};
     private String[] major = {"빅데이터", "콘텐츠IT", "빅데이터", "콘텐츠IT", "빅데이터", "콘텐츠IT", "빅데이터", "콘텐츠IT", "빅데이터", "콘텐츠IT", "빅데이터"};
@@ -20,10 +20,10 @@ public class Main_MemberList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.club_member_page);
+        setContentView(R.layout.member_list_main);
 
         //변수 초기화
-        adapter = new ListMemberAdapter();
+        adapter = new Member_ListAdapter();
         listview = (ListView) findViewById(R.id.member_list_view);
 
         //어뎁터 할당

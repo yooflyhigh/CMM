@@ -12,7 +12,7 @@ import com.example.clubmanagement.Login.Login_View.LoginActivity;
 
 import static java.lang.Thread.sleep;
 
-public class Splash extends Activity {
+public class Main_Splash extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

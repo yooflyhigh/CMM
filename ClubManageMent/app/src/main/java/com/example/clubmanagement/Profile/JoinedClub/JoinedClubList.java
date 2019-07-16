@@ -11,9 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.clubmanagement.ClubPage.Home.Main_HomePage;
-import com.example.clubmanagement.System.Adapter.ListViewAdapter;
+import com.example.clubmanagement.System.Adapter.ListViewAdapter.Fragment_List_Adapter;
 import com.example.clubmanagement.ClubPage.Home.ClubPoster;
-import com.example.clubmanagement.System.ListVO.ListVO;
+import com.example.clubmanagement.System.ListVO.ListVO_Frg;
 import com.example.clubmanagement.Profile.UserID;
 import com.example.clubmanagement.DataBase.DBConnect.ImageURL.CNT_Image_File;
 import com.example.clubmanagement.R;
@@ -26,7 +26,7 @@ import static java.lang.Thread.sleep;
 
 public class JoinedClubList extends Fragment {
     private ListView listview;
-    private ListViewAdapter adapter;
+    private Fragment_List_Adapter adapter;
     CNT_Image_File ImageDown;
 
     public static JoinedClubList newInstance() {
@@ -40,8 +40,8 @@ public class JoinedClubList extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // 메인 메소드
-        View v = inflater.inflate(R.layout.fragment_page_one, container, false);
-        adapter = new ListViewAdapter();
+        View v = inflater.inflate(R.layout.frg_joined_club_list, container, false);
+        adapter = new Fragment_List_Adapter();
         listview = (ListView) v.findViewById(R.id.List_view);
         listview.setAdapter(adapter);
         ShowList();
@@ -79,7 +79,7 @@ public class JoinedClubList extends Fragment {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ListVO Vo = (ListVO) (listview.getAdapter().getItem(position));
+                ListVO_Frg Vo = (ListVO_Frg) (listview.getAdapter().getItem(position));
                 ClubPoster.image = (BitmapDrawable) Vo.getImg();
                 startActivity(new Intent(getActivity(), Main_HomePage.class));
             }

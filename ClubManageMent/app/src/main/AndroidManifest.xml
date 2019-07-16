@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name = ".Loading.Splash"
+            android:name = ".Loading.Main_Splash"
             android:theme="@style/SplashTheme"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -18,14 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name = ".System.Fragment.FragmentStart"     />
+        <activity android:name = ".System.Fragment.Fragment_Start"     />
         <activity android:name=".Login.Login_View.LoginActivity"/>
         <activity android:name=".Join.JoinPopUp" android:theme="@android:style/Theme.Dialog"/>
         <activity android:name=".ClubPage.Home.Main_HomePage"/>
         <activity android:name=".ClubPage.MemberList.Main_MemberList"/>
         <activity android:name=".ClubPage.ApplyList.Main_ApplyList"/>
         <activity android:name=".ClubPage.Restaurant.Main_Restaurant"/>
-        <activity android:name=".ClubPage.Item.Main_ItemStart"/>
+        <activity android:name=".ClubPage.Item.Main_ItemList"/>
         <activity android:name=".ClubPage.Item.ItemPopUp" android:theme="@android:style/Theme.Dialog"/>
     </application>
 

@@ -19,7 +19,7 @@ public class ItemPopUp extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         //타이틀바 없애기
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.item_activity);
+        setContentView(R.layout.item_popup);
 
         itemrental = (Button)findViewById(R.id.itemrental); // 팝업 버튼 아이디
         itemrental.setOnClickListener(this);
@@ -60,7 +60,7 @@ public class ItemPopUp extends Activity implements View.OnClickListener{
                         .setNeutralButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Main_ItemStart.quantity[Main_ItemStart.select] -=1;
+                                Main_ItemList.quantity[Main_ItemList.select] -=1;
                                 finish();
                             }
                         })
@@ -71,28 +71,28 @@ public class ItemPopUp extends Activity implements View.OnClickListener{
             }
         }
         else if(view == itemreturn){
-            switch(Main_ItemStart.select){
+            switch(Main_ItemList.select){
                 case 0:
-                    if(Main_ItemStart.quantity[0] < 3)
-                        Main_ItemStart.quantity[0] += 1;
+                    if(Main_ItemList.quantity[0] < 3)
+                        Main_ItemList.quantity[0] += 1;
                     else
                         Toast.makeText(getApplicationContext(), "대여하지 않았습니다.", Toast.LENGTH_LONG).show();
                     break;
                 case 1:
-                     if(Main_ItemStart.quantity[1] < 50 )
-                        Main_ItemStart.quantity[1] += 1;
+                     if(Main_ItemList.quantity[1] < 50 )
+                        Main_ItemList.quantity[1] += 1;
                      else
                          Toast.makeText(getApplicationContext(), "대여하지 않았습니다.", Toast.LENGTH_LONG).show();
                     break;
                 case 2:
-                    if(Main_ItemStart.quantity[2] < 3 )
-                        Main_ItemStart.quantity[2] += 1;
+                    if(Main_ItemList.quantity[2] < 3 )
+                        Main_ItemList.quantity[2] += 1;
                     else
                         Toast.makeText(getApplicationContext(), "대여하지 않았습니다.", Toast.LENGTH_LONG).show();
                     break;
                 case 3:
-                    if(Main_ItemStart.quantity[3] < 5 )
-                        Main_ItemStart.quantity[3] += 1;
+                    if(Main_ItemList.quantity[3] < 5 )
+                        Main_ItemList.quantity[3] += 1;
                     else
                         Toast.makeText(getApplicationContext(), "대여하지 않았습니다.", Toast.LENGTH_LONG).show();
                     break;

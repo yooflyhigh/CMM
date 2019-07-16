@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable;
  * Created by YooJongHyeok on 2017-08-07.
  */
 
-public class ListVO {
+public class ListVO_Frg {
     private Drawable img;
     private String Title;
     private String context;

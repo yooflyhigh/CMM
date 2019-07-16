@@ -14,10 +14,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.clubmanagement.System.Adapter.ListViewAdapter;
+import com.example.clubmanagement.System.Adapter.ListViewAdapter.Fragment_List_Adapter;
 import com.example.clubmanagement.ClubPage.Home.ClubPoster;
 import com.example.clubmanagement.DataBase.DBConnect.ImageURL.CNT_Image_File;
-import com.example.clubmanagement.System.ListVO.ListVO;
+import com.example.clubmanagement.System.ListVO.ListVO_Frg;
 import com.example.clubmanagement.R;
 
 import java.util.HashMap;
@@ -27,7 +27,7 @@ import static com.example.clubmanagement.DataBase.DataPool.Club.Club_Item_list;
 
 public class Center extends Fragment {
     private ListView listview;
-    private ListViewAdapter adapter;
+    private Fragment_List_Adapter adapter;
     Button applyUp;
     CNT_Image_File ImageDown;
     boolean flag = false;
@@ -43,7 +43,7 @@ public class Center extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_page_three, container, false);
+        View v = inflater.inflate(R.layout.frg_center_list, container, false);
 
         Spinner checkSpinner = (Spinner) v.findViewById(R.id.spinner_Check);
         ArrayAdapter Adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.major, android.R.layout.simple_spinner_item);
@@ -53,7 +53,7 @@ public class Center extends Fragment {
         checkSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                adapter = new ListViewAdapter();
+                adapter = new Fragment_List_Adapter();
                 DataInput(position);
             }
             @Override
@@ -124,7 +124,7 @@ public class Center extends Fragment {
             @Override
             public void onClick(View view) {
                 if(Pos < listview.getCount()){
-                    ListVO Vo = (ListVO)(listview.getAdapter().getItem(Pos));
+                    ListVO_Frg Vo = (ListVO_Frg)(listview.getAdapter().getItem(Pos));
                     ClubPoster.image = (BitmapDrawable) Vo.getImg();
                     Intent intent = new Intent(getActivity(), JoinPopUp.class);
                     startActivityForResult(intent, 1);

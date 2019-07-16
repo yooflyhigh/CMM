@@ -1,4 +1,4 @@
-package com.example.clubmanagement.System.Adapter;
+package com.example.clubmanagement.System.Adapter.ListViewAdapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -9,19 +9,19 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.clubmanagement.System.ListVO.ListVO;
+import com.example.clubmanagement.System.ListVO.ListVO_Frg;
 import com.example.clubmanagement.R;
 import java.util.ArrayList;
 
-public class ListViewAdapter extends BaseAdapter {
+public class Fragment_List_Adapter extends BaseAdapter {
 
-    private ArrayList<ListVO> listVO = new ArrayList<ListVO>();
+    private ArrayList<ListVO_Frg> listVOFrg = new ArrayList<ListVO_Frg>();
 
-    public ListViewAdapter() {
+    public Fragment_List_Adapter() {
     }
     @Override
     public int getCount() {
-        return listVO.size();
+        return listVOFrg.size();
     }
 
     // ** 이 부분에서 리스트뷰에 데이터를 넣어줌 **
@@ -33,16 +33,14 @@ public class ListViewAdapter extends BaseAdapter {
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.custom_listview, parent, false);
+            convertView = inflater.inflate(R.layout.frg_fragment_list_adapter, parent, false);
         }
-
 
         ImageView image = (ImageView) convertView.findViewById(R.id.img);
         TextView title = (TextView) convertView.findViewById(R.id.title);
         TextView Context = (TextView) convertView.findViewById(R.id.context);
 
-
-        final ListVO listViewItem = listVO.get(position);
+        final ListVO_Frg listViewItem = listVOFrg.get(position);
 
         // 아이템 내 각 위젯에 데이터 반영
         image.setImageDrawable(listViewItem.getImg());
@@ -53,7 +51,6 @@ public class ListViewAdapter extends BaseAdapter {
         return convertView;
     }
 
-
     @Override
     public long getItemId(int position) {
         return position;
@@ -62,17 +59,17 @@ public class ListViewAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return listVO.get(position);
+        return listVOFrg.get(position);
     }
 
     // 데이터값 넣어줌
     public void addVO(Drawable icon, String title, String desc) {
-        ListVO item = new ListVO();
+        ListVO_Frg item = new ListVO_Frg();
 
         item.setImg(icon);
         item.setTitle(title);
 
         item.setContext(desc);
-        listVO.add(item);
+        listVOFrg.add(item);
     }
 }

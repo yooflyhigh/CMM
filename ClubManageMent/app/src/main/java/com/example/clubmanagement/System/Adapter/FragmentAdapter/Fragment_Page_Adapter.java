@@ -1,4 +1,4 @@
-package com.example.clubmanagement.System.Adapter;
+package com.example.clubmanagement.System.Adapter.FragmentAdapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,9 +8,9 @@ import com.example.clubmanagement.Profile.JoinedClub.JoinedClubList;
 import com.example.clubmanagement.Join.Center;
 import com.example.clubmanagement.Join.Major;
 
-public class TestPagerAdapter extends FragmentPagerAdapter {
+public class Fragment_Page_Adapter extends FragmentPagerAdapter {
     private static final int PAGE_NUMBER = 3;
-    public TestPagerAdapter(FragmentManager fm){
+    public Fragment_Page_Adapter(FragmentManager fm){
         super(fm);
     }
     @Override

@@ -20,7 +20,7 @@ public class JoinPopUp extends Activity implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.apply_activity);
+        setContentView(R.layout.join_popup);
 
         //팝업 버튼 설정
         linear = (LinearLayout) findViewById(R.id.linr);

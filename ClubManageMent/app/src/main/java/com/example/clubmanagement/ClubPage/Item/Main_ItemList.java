@@ -7,21 +7,21 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.clubmanagement.System.Adapter.ItemListAdapter;
+import com.example.clubmanagement.System.Adapter.ListViewAdapter.Item_ListAdapter;
 import com.example.clubmanagement.R;
 
-public class Main_ItemStart extends AppCompatActivity {
+public class Main_ItemList extends AppCompatActivity {
     private String[] Item = {"컴퓨터", "A4", "키보드", "충전기"};
     public static int[] quantity = {3, 50, 3, 5};
     public static int select;
-    private ItemListAdapter adapter_Item;
+    private Item_ListAdapter adapter_Item;
     private ListView listview;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.item_form);
+        setContentView(R.layout.item_list_main);
 
-        adapter_Item = new ItemListAdapter();
+        adapter_Item = new Item_ListAdapter();
         listview = (ListView) findViewById(R.id.item_listview);
         listview.setAdapter(adapter_Item);
 
@@ -33,7 +33,7 @@ public class Main_ItemStart extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 select = position;
-                Intent intent = new Intent(Main_ItemStart.this, ItemPopUp.class);
+                Intent intent = new Intent(Main_ItemList.this, ItemPopUp.class);
                 startActivityForResult(intent, 1);
             }
         });
@@ -44,7 +44,7 @@ public class Main_ItemStart extends AppCompatActivity {
     public void onResume() {
         super.onResume();
 
-        adapter_Item = new ItemListAdapter();
+        adapter_Item = new Item_ListAdapter();
         //listview = (ListView) findViewById(R.id.item_listview);
         listview.setAdapter(adapter_Item);
         for (int i = 0; i < 4; i++) {

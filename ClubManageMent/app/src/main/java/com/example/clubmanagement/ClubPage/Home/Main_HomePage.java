@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import com.example.clubmanagement.ClubPage.ApplyList.Main_ApplyList;
 import com.example.clubmanagement.ClubPage.MemberList.Main_MemberList;
-import com.example.clubmanagement.ClubPage.Item.Main_ItemStart;
+import com.example.clubmanagement.ClubPage.Item.Main_ItemList;
 import com.example.clubmanagement.R;
 import com.example.clubmanagement.ClubPage.Restaurant.Main_Restaurant;
 
@@ -25,7 +25,7 @@ public class Main_HomePage extends AppCompatActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.clubpage);
+        setContentView(R.layout.homepage_main);
         ImageView ClubImage = (ImageView) findViewById(R.id.imageView);
         ClubImage.setImageBitmap(ClubPoster.image.getBitmap());
 
@@ -49,7 +49,7 @@ public class Main_HomePage extends AppCompatActivity {
         button3.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Main_HomePage.this, Main_ItemStart.class));
+                startActivity(new Intent(Main_HomePage.this, Main_ItemList.class));
             }
         });
 
