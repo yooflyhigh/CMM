@@ -1,4 +1,4 @@
-package com.example.clubmanagement.login;
+package com.example.clubmanagement.Login.Login_View;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.clubmanagement.Fragment.FragmentStart;
+import com.example.clubmanagement.Login.Auto_Login.SaveSharedPreference;
 import com.example.clubmanagement.R;
 
 import static java.lang.Thread.sleep;

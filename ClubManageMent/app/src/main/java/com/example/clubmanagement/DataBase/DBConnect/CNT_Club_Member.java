@@ -1,6 +1,4 @@
-package com.example.clubmanagement.Database;
-
-import android.os.AsyncTask;
+package com.example.clubmanagement.DataBase.DBConnect;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,7 +11,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Club_Member_Data {
+public class CNT_Club_Member {
     String myJSON;
     private static final String TAG_RESULTS = "result";
     private static final String CLUB_ID = "CLUB_ID"; // 동아리 번호
@@ -39,10 +37,10 @@ public class Club_Member_Data {
     private static final String UPDATE_IP = "UPDATE_IP";
     private static final String UPDATE_DATE = "UPDATE_DATE";
 
-    public JSONArray JSON_Club_Item = null;
+    public JSONArray JSON_Club_Item;
     public ArrayList<HashMap<String, String>> Club_Member_Item_list;
 
-    public Club_Member_Data() {
+    public CNT_Club_Member() {
         JSON_Club_Item = null;
         Club_Member_Item_list = new ArrayList<HashMap<String, String>>();
 
@@ -123,10 +121,14 @@ public class Club_Member_Data {
         try {
             URL url = new URL(uri);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            StringBuilder sb = new StringBuilder();
+            con.setDoInput(true);
+            con.setDoOutput(true);
+            con.setConnectTimeout(1000);
+            con.setUseCaches(false);
+            con.setRequestMethod("POST");
 
+            StringBuilder sb = new StringBuilder();
             bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            //StringBuilder sb = new StringBuilder();
             String json;
             while ((json = bufferedReader.readLine()) != null) {
                 sb.append(json + "\n");

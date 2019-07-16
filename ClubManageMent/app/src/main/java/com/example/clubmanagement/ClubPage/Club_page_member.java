@@ -1,23 +1,11 @@
 package com.example.clubmanagement.ClubPage;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
 import com.example.clubmanagement.Adapter.ListMemberAdapter;
-import com.example.clubmanagement.Adapter.ListViewAdapter;
-import com.example.clubmanagement.Database.ClubData;
-import com.example.clubmanagement.Database.Club_Member_Data;
-import com.example.clubmanagement.Database.ImageURL.Image_File;
 import com.example.clubmanagement.R;
-import com.example.clubmanagement.login.LoginActivity;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import static java.lang.Thread.sleep;
 

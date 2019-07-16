@@ -1,24 +1,15 @@
 package com.example.clubmanagement.ClubPage;
 
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 
-import com.example.clubmanagement.Apply.ApplyActivity;
-import com.example.clubmanagement.DATAPOOL.Club;
-import com.example.clubmanagement.Database.ClubData;
-import com.example.clubmanagement.Database.ImageURL.Image_File;
 import com.example.clubmanagement.Item.Item_Activity;
 import com.example.clubmanagement.R;
 import com.example.clubmanagement.Restaurant.Restaurant_Activity;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import static java.lang.Thread.sleep;
 
@@ -43,12 +34,12 @@ public class Club_page extends AppCompatActivity {
       //  }
         /*
         Club_Item_list = Club.Club_Item_list;
-        Image_File ht;
+        CNT_Image_File ht;
         for (int i = 0; i < 4; i++) {
             Club_Item = Club_Item_list.get(i);
             if(Club_Item.get("CLUB_ID").equals(ClubPositon.position)) {
                 String url = Club_Item.get("INTRO_FILE_NM");
-                ht = new Image_File(url);
+                ht = new CNT_Image_File(url);
                 ht.run();
                 try {
                     sleep(100);

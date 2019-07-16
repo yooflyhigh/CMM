@@ -1,4 +1,4 @@
-package com.example.clubmanagement.data.model;
+package com.example.clubmanagement.Login.Login_Data.model;
 
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository

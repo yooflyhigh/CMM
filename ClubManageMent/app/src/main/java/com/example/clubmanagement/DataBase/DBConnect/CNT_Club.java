@@ -1,29 +1,17 @@
-package com.example.clubmanagement.Database;
-
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.widget.ListAdapter;
-import android.widget.SimpleAdapter;
-
-import com.example.clubmanagement.R;
+package com.example.clubmanagement.DataBase.DBConnect;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ClubData {
+public class CNT_Club {
     String myJSON;
     private static final String TAG_RESULTS = "result";
     private static final String CLUB_ID = "CLUB_ID"; // 동아리 번호
@@ -46,11 +34,11 @@ public class ClubData {
     private static final String UPDATE_IP = "UPDATE_IP";
     private static final String UPDATE_DATE = "UPDATE_DATE";
 
-    public JSONArray JSON_Club_Item = null;
+    public JSONArray JSON_Club_Item;
     public ArrayList<HashMap<String, String>> Club_Item_list;
 
 
-    public ClubData() {
+    public CNT_Club() {
         JSON_Club_Item = null;
         Club_Item_list = new ArrayList<HashMap<String, String>>();
 
@@ -126,6 +114,12 @@ public class ClubData {
         try {
             URL url = new URL(uri);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setDoInput(true);
+            con.setDoOutput(true);
+            con.setConnectTimeout(1000);
+            con.setUseCaches(false);
+            con.setRequestMethod("POST");
+
             StringBuilder sb = new StringBuilder();
             bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String json;

@@ -1,4 +1,4 @@
-package com.example.clubmanagement.Database.ImageURL;
+package com.example.clubmanagement.DataBase.DBConnect.ImageURL;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,7 +10,7 @@ import java.net.URL;
 import android.os.Handler;
 import android.os.Message;
 
-public class Image_File implements Runnable{
+public class CNT_Image_File implements Runnable{
     // 1. 변수 선언
 
     public Bitmap bitmap; // 비트맵 객체
@@ -23,9 +23,9 @@ public class Image_File implements Runnable{
     };
     private String Url;
 
-    public Image_File(String url){
+    public CNT_Image_File(String url){
         Url = url;
-        Thread th = new Thread(Image_File.this);
+        Thread th = new Thread(CNT_Image_File.this);
         th.start();
     }
 

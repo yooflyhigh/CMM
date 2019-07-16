@@ -1,4 +1,4 @@
-package com.example.clubmanagement.Database;
+package com.example.clubmanagement.DataBase.DBConnect;
 
 import android.os.AsyncTask;
 
@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class StudentData {
+public class CNT_Student {
     String myJSON;
     public String Temp;
     private static final String TAG_RESULTS = "result";
@@ -26,13 +26,18 @@ public class StudentData {
     private static final String UPDATE_IP = "UPDATE_IP";
     private static final String UPDATE_DATE = "UPDATE_DATE";
 
-    public JSONArray JSON_Student_Item = null;
+    public JSONArray JSON_Student_Item;
     public ArrayList<HashMap<String, String>> Student_Item_list;
 
-    public StudentData(){
+    public CNT_Student(){
         JSON_Student_Item = null;
         Student_Item_list = new ArrayList<HashMap<String, String>>();
-        getData("http://210.115.230.212:80/Student.php"); //http://[현재자신의아이피]/PHP_connection.php
+        new Thread() {
+            public void run() {
+                myJSON = getData("http://210.115.230.212/Student.php");
+                GetListData();
+            }
+        }.start();
     }
 
     public ArrayList<HashMap<String, String>> GetListData() {
@@ -43,27 +48,27 @@ public class StudentData {
                 JSONObject c = JSON_Student_Item.getJSONObject(i);
                 String id = c.getString(STUDENT_ID);
                 String name = c.getString(PASSWORD);
+                /*
                 String INID = c.getString(INPUT_ID);
                 String INIP = c.getString(INPUT_IP);
                 String INDATE = c.getString(INPUT_DATE);
                 String UPID = c.getString(UPDATE_ID);
                 String UPIP = c.getString(UPDATE_IP);
                 String UPDATE = c.getString(UPDATE_DATE);
+                */
                 HashMap<String, String> Club_Item = new HashMap<String, String>();
                 Club_Item.put(STUDENT_ID, id);
                 Club_Item.put(PASSWORD, name);
+                /*
                 Club_Item.put(INPUT_ID, INID);
                 Club_Item.put(INPUT_IP, INIP);
                 Club_Item.put(INPUT_DATE, INDATE);
                 Club_Item.put(UPDATE_ID, UPID);
                 Club_Item.put(UPDATE_IP, UPIP);
                 Club_Item.put(UPDATE_DATE, UPDATE);
-
+                */
                 Student_Item_list.add(Club_Item);
             }
-
-            return Student_Item_list;
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -73,44 +78,28 @@ public class StudentData {
         Student_Item_list.clear();
     }
 
-    public void getData(String url) {
-        class GetDataJSON extends AsyncTask<String, Void, String> {
-            @Override
-            protected String doInBackground(String... params) {
-                String uri = params[0];
-                try {
-                    URL url = new URL(uri);//URL 객체 생성
-                    //URL을 이용해서 웹페이지에 연결하는 부분
-                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                    httpURLConnection.setDoInput(true);
-                    httpURLConnection.setDoOutput(true);
-                    httpURLConnection.setConnectTimeout(1000);
-                    httpURLConnection.setUseCaches(false);
-                    httpURLConnection.setRequestMethod("POST");
+    public String getData(String uri) {
+        BufferedReader bufferedReader = null;
+        try {
+            URL url = new URL(uri);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setDoInput(true);
+            con.setDoOutput(true);
+            con.setConnectTimeout(1000);
+            con.setUseCaches(false);
+            con.setRequestMethod("POST");
 
-                    //바이트단위 입력스트림 생성 소스는 httpURLConnection
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
-                    String temp;
-                    //문자열 처리를 더 빠르게 하기 위해 StringBuilder클래스를 사용함
-                    StringBuilder stringBuilder = new StringBuilder();
-                    //한줄씩 읽어서 stringBuilder에 저장함
-                    while ((temp = bufferedReader.readLine()) != null) {
-                        stringBuilder.append(temp + "\n");//stringBuilder에 넣어줌
-                    }
-                    //사용했던 것도 다 닫아줌
-                    bufferedReader.close();
-                    httpURLConnection.disconnect();
-                    //Temp =  stringBuilder.toString().trim();
-                    return  stringBuilder.toString().trim(); //trim은 앞뒤의 공백을 제거함
-
-                } catch (Exception e) {
-                    return null;
-                }
+            StringBuilder sb = new StringBuilder();
+            bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String json;
+            while ((json = bufferedReader.readLine()) != null) {
+                sb.append(json + "\n");
             }
-            @Override
-            protected void onPostExecute(String result) {myJSON = result; }
+
+            return sb.toString().trim();
+
+        } catch (Exception e) {
+            return null;
         }
-        GetDataJSON g = new GetDataJSON();
-        g.execute(url);
     }
 }

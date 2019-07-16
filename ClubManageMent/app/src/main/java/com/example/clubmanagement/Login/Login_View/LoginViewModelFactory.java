@@ -1,11 +1,11 @@
-package com.example.clubmanagement.login;
+package com.example.clubmanagement.Login.Login_View;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
-import com.example.clubmanagement.data.LoginDataSource;
-import com.example.clubmanagement.data.LoginRepository;
+import com.example.clubmanagement.Login.Login_Data.LoginDataSource;
+import com.example.clubmanagement.Login.Login_Data.LoginRepository;
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.

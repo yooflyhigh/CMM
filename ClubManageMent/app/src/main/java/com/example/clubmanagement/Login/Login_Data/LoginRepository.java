@@ -1,6 +1,6 @@
-package com.example.clubmanagement.data;
+package com.example.clubmanagement.Login.Login_Data;
 
-import com.example.clubmanagement.data.model.LoggedInUser;
+import com.example.clubmanagement.Login.Login_Data.model.LoggedInUser;
 
 /**
  * Class that requests authentication and user information from the remote data source and

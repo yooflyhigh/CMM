@@ -1,4 +1,4 @@
-package com.example.clubmanagement.login;
+package com.example.clubmanagement.Login.Login_View;
 
 /**
  * Class exposing authenticated user details to the UI.

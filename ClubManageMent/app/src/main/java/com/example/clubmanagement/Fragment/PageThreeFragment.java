@@ -2,11 +2,8 @@ package com.example.clubmanagement.Fragment;
 
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -23,15 +20,8 @@ import android.widget.Toast;
 import com.example.clubmanagement.Adapter.ListViewAdapter;
 import com.example.clubmanagement.Apply.ApplyActivity;
 import com.example.clubmanagement.ClubPage.ClubPoster;
-import com.example.clubmanagement.DATAPOOL.Club;
-import com.example.clubmanagement.Database.ClubData;
-import com.example.clubmanagement.Database.Club_Member_Data;
-import com.example.clubmanagement.Database.ImageURL.Image_File;
 import com.example.clubmanagement.ListVO.ListVO;
 import com.example.clubmanagement.R;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import static android.app.Activity.RESULT_OK;
 import static java.lang.Thread.sleep;
@@ -161,15 +151,15 @@ public class PageThreeFragment extends Fragment {
         for (int i = 0; i < Club_Item_list.size(); i++) {
             Club_Item = Club_Item_list.get(i);
             String url = Club_Item.get("INTRO_FILE_NM");
-            Image_File ht = new Image_File(url);
-            ht.run();
+            CNT_Image_File Club_Poster = new CNT_Image_File(url);
+            Club_Poster.run();
             try {
                 sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
-            Cp.image = new BitmapDrawable(getResources(),ht.bitmap);
+            Cp.image = new BitmapDrawable(getResources(),Club_Poster.bitmap);
             if (Club_Item.get("CLUB_GB_CD").equals("1002") && Code == 0) {
                 adapter.addVO(Cp.image, Club_Item.get("CLUB_NM"), Club_Item.get("INTRO_CONT"));
             } else if (Club_Item.get("CLUB_GB_CD").equals("1002") && Code == 1) {

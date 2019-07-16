@@ -1,4 +1,4 @@
-package com.example.clubmanagement.login;
+package com.example.clubmanagement.Login.Auto_Login;
 
 import android.content.Context;
 import android.content.SharedPreferences;

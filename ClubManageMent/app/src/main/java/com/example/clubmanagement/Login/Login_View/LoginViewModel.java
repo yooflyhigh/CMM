@@ -1,4 +1,4 @@
-package com.example.clubmanagement.login;
+package com.example.clubmanagement.Login.Login_View;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
@@ -6,9 +6,9 @@ import android.arch.lifecycle.ViewModel;
 import android.util.Patterns;
 
 import com.example.clubmanagement.R;
-import com.example.clubmanagement.data.LoginRepository;
-import com.example.clubmanagement.data.Result;
-import com.example.clubmanagement.data.model.LoggedInUser;
+import com.example.clubmanagement.Login.Login_Data.LoginRepository;
+import com.example.clubmanagement.Login.Login_Data.Result;
+import com.example.clubmanagement.Login.Login_Data.model.LoggedInUser;
 
 public class LoginViewModel extends ViewModel {
 

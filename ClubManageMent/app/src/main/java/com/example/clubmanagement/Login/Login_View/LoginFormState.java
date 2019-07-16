@@ -1,4 +1,4 @@
-package com.example.clubmanagement.login;
+package com.example.clubmanagement.Login.Login_View;
 
 import android.support.annotation.Nullable;
 
