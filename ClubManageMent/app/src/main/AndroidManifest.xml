@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name = ".Loading.Loading_Activity"
+            android:name = ".Loading.Splash"
             android:theme="@style/SplashTheme"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -18,18 +18,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name = ".Fragment.FragmentStart"     />
+        <activity android:name = ".System.Fragment.FragmentStart"     />
         <activity android:name=".Login.Login_View.LoginActivity"/>
-        <activity android:name=".Popup.PopupActivity" android:theme="@android:style/Theme.Dialog"/>
-        <activity android:name=".Apply.ApplyActivity" android:theme="@android:style/Theme.Dialog"/>
-        <activity android:name=".Form.Application_Form"/>
-        <activity android:name=".Club_Home.Club_Home"/>
-        <activity android:name=".ClubPage.Club_page"/>
-        <activity android:name=".ClubPage.Club_page_member"/>
-        <activity android:name=".ClubPage.Club_Apply_member"/>
-        <activity android:name=".Restaurant.Restaurant_Activity"/>
-        <activity android:name=".Item.Item_Activity"/>
-        <activity android:name=".Item.Itempopup" android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".Join.JoinPopUp" android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".ClubPage.Home.Main_HomePage"/>
+        <activity android:name=".ClubPage.MemberList.Main_MemberList"/>
+        <activity android:name=".ClubPage.ApplyList.Main_ApplyList"/>
+        <activity android:name=".ClubPage.Restaurant.Main_Restaurant"/>
+        <activity android:name=".ClubPage.Item.Main_ItemStart"/>
+        <activity android:name=".ClubPage.Item.ItemPopUp" android:theme="@android:style/Theme.Dialog"/>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"/>

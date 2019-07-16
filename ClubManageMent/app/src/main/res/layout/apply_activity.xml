@@ -34,7 +34,7 @@
             android:textSize="15sp" />
 
         <Button
-            android:id="@+id/apply"
+            android:id="@+id/join"
             android:layout_width="150dp"
             android:layout_height="53dp"
             android:background="#00000000"
