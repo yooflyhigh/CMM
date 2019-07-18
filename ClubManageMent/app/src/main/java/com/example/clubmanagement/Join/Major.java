@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.clubmanagement.System.Adapter.ListViewAdapter.Fragment_List_Adapter;
 import com.example.clubmanagement.ClubPage.Home.ClubPoster;
 import com.example.clubmanagement.DataBase.DBConnect.ImageURL.CNT_Image_File;
+import com.example.clubmanagement.System.Fragment.Fragment_Start;
 import com.example.clubmanagement.System.ListVO.ListVO_Frg;
 import com.example.clubmanagement.R;
 
@@ -25,7 +26,7 @@ import java.util.HashMap;
 import static com.example.clubmanagement.DataBase.DataPool.Club.Club_Item_list;
 import static java.lang.Thread.sleep;
 
-public class Major extends Fragment {
+public class Major extends Fragment implements Fragment_Start.OnBackPressedListener {
     public ListView listview;
     private Fragment_List_Adapter adapter;
 
@@ -142,5 +143,9 @@ public class Major extends Fragment {
                 }
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        //fragment_start로 가서 이벤트 뒤로가기 이벤트 처리
     }
 }

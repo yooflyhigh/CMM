@@ -22,12 +22,13 @@ import android.widget.Toast;
 import com.example.clubmanagement.System.Fragment.Fragment_Start;
 import com.example.clubmanagement.Login.Auto_Login.SaveSharedPreference;
 import com.example.clubmanagement.R;
-
-import static java.lang.Thread.sleep;
+import com.example.clubmanagement.System.Listener.BackPressCloseHandler;
 
 public class LoginActivity extends AppCompatActivity {
     private LoginViewModel loginViewModel;
-        @Override
+    private BackPressCloseHandler BackPressCloseHandler = new BackPressCloseHandler(this);
+
+    @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.login_activity);
@@ -139,5 +140,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        BackPressCloseHandler.onBackPressed("뒤로가기 버튼 한번 더 누르면 종료", 3000);
     }
 }

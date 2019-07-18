@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.example.clubmanagement.ClubPage.Home.Main_HomePage;
 import com.example.clubmanagement.System.Adapter.ListViewAdapter.Fragment_List_Adapter;
 import com.example.clubmanagement.ClubPage.Home.ClubPoster;
+import com.example.clubmanagement.System.Fragment.Fragment_Start;
 import com.example.clubmanagement.System.ListVO.ListVO_Frg;
 import com.example.clubmanagement.Profile.UserID;
 import com.example.clubmanagement.DataBase.DBConnect.ImageURL.CNT_Image_File;
@@ -24,7 +25,8 @@ import static com.example.clubmanagement.DataBase.DataPool.Club.Club_Item_list;
 import static com.example.clubmanagement.DataBase.DataPool.Member.Club_Member_Item_list;
 import static java.lang.Thread.sleep;
 
-public class JoinedClubList extends Fragment {
+public class JoinedClubList extends Fragment implements Fragment_Start.OnBackPressedListener {
+
     private ListView listview;
     private Fragment_List_Adapter adapter;
     CNT_Image_File ImageDown;
@@ -84,5 +86,9 @@ public class JoinedClubList extends Fragment {
                 startActivity(new Intent(getActivity(), Main_HomePage.class));
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 }
