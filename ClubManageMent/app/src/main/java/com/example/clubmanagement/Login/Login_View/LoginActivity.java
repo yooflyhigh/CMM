@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.login_activity);
-//Todo: 자동로그인 구현하기!
+
             loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
                     .get(LoginViewModel.class);
 
@@ -41,24 +41,21 @@ public class LoginActivity extends AppCompatActivity {
             final ProgressBar loadingProgressBar = findViewById(R.id.loading);
             final CheckBox autoLogin = findViewById(R.id.autoLogin);
 
-            if(SaveSharedPreference.getUserName(LoginActivity.this).length() != 0) {
-                autoLogin.setChecked(true);
-                //SaveSharedPreference.setUserName(LoginActivity.this, usernameEditText.getText().toString());
-                //SaveSharedPreference.setUserPass(LoginActivity.this, passwordEditText.getText().toString());
+            loginButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    loadingProgressBar.setVisibility(View.VISIBLE);
+                    loginViewModel.login(usernameEditText.getText().toString(),
+                            passwordEditText.getText().toString());
+                }
+            });
+
+            if(SaveSharedPreference.getIsEnabled(LoginActivity.this)) {
                 usernameEditText.setText(SaveSharedPreference.getUserName(LoginActivity.this));
                 passwordEditText.setText(SaveSharedPreference.getUserPass(LoginActivity.this));
-
-                //loginButton.performLongClick();
-                /*loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());*/
-/*
-                loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
-                */
-                //updateUiWithUser(new LoggedInUserView(SaveSharedPreference.getUserName(LoginActivity.this)));
-                //startActivity(new Intent(LoginActivity.this, Fragment_Start.class));
-                //startActivity(new Intent(LoginActivity.this, Fragment_Start.class));
+                autoLogin.setChecked(true);
+                loginButton.callOnClick();
             }
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
@@ -90,10 +87,18 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginResult.getSuccess() != null) {
                     updateUiWithUser(loginResult.getSuccess());
 
-                    SaveSharedPreference.setUserName(LoginActivity.this, usernameEditText.getText().toString());
-                    SaveSharedPreference.setUserPass(LoginActivity.this,passwordEditText.getText().toString());
-                    startActivity(new Intent(LoginActivity.this, Fragment_Start.class));
+                    if(autoLogin.isChecked()){
+                        SaveSharedPreference.setUserName(LoginActivity.this, usernameEditText.getText().toString());
+                        SaveSharedPreference.setUserPass(LoginActivity.this, passwordEditText.getText().toString());
+                        SaveSharedPreference.setAutoLoginCheck(LoginActivity.this,true);
+                    }
+                    else{
+                        SaveSharedPreference.setUserName(LoginActivity.this, "");
+                        SaveSharedPreference.setUserPass(LoginActivity.this, "");
+                        SaveSharedPreference.setAutoLoginCheck(LoginActivity.this,false);
+                    }
 
+                    startActivity(new Intent(LoginActivity.this, Fragment_Start.class));
                 }
             }
         });
@@ -115,12 +120,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         };
 
-
-            usernameEditText.addTextChangedListener(afterTextChangedListener);
-        passwordEditText.addTextChangedListener(afterTextChangedListener);
-
         passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -128,16 +128,6 @@ public class LoginActivity extends AppCompatActivity {
                             passwordEditText.getText().toString());
                 }
                 return false;
-            }
-        });
-
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
             }
         });
     }
