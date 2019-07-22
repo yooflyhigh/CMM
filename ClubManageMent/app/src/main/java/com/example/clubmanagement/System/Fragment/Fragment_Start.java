@@ -39,6 +39,7 @@ public class Fragment_Start extends AppCompatActivity {
             for(Fragment fragment : fragmentList){
                 if(fragment instanceof OnBackPressedListener){
                     ((OnBackPressedListener)fragment).onBackPressed();
+                    //브렌치에서 테스트중
                 }
             }
         }
