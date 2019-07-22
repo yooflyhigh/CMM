@@ -56,7 +56,7 @@ public class Fragment_Start extends AppCompatActivity implements NavigationView.
         getMenuInflater().inflate(R.menu.navi_main,menu);
         return true;
     }
-
+    //TODO : 계정화면 정상화 시키고 로그아웃 구현하기
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
