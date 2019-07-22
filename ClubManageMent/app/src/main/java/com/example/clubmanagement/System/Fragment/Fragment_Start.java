@@ -39,8 +39,6 @@ public class Fragment_Start extends AppCompatActivity {
             for(Fragment fragment : fragmentList){
                 if(fragment instanceof OnBackPressedListener){
                     ((OnBackPressedListener)fragment).onBackPressed();
-                    //되나안되나 체크
-
                 }
             }
         }
