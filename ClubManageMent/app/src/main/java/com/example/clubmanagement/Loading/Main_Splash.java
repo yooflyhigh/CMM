@@ -19,10 +19,10 @@ public class Main_Splash extends Activity {
         super.onCreate(savedInstanceState);
 
         try{
+            new Student();
             new Club();
             new Member();
             new Restaurant();
-            new Student();
             sleep(1000);
         }
         catch (InterruptedException e){

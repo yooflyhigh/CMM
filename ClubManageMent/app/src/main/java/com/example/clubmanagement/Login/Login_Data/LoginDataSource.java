@@ -1,7 +1,11 @@
 package com.example.clubmanagement.Login.Login_Data;
 
+import android.widget.ImageView;
+
 import com.example.clubmanagement.Profile.UserID;
 import com.example.clubmanagement.Login.Login_Data.model.LoggedInUser;
+import com.example.clubmanagement.Profile.UserImage;
+import com.example.clubmanagement.R;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -15,7 +19,6 @@ public class LoginDataSource {
     public Result<LoggedInUser> login(String username, String password) {
         HashMap<String, String> User;
         try {
-            // TODO: handle loggedInUser authentication
             for (int i = 0; i < Student_Item_list.size(); i++) {
                 User = Student_Item_list.get(i);
                 String STUDENT_ID = User.get("STUDENT_ID");
