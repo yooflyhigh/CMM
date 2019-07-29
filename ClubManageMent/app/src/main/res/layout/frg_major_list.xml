@@ -43,7 +43,7 @@
             <ListView
                 android:id="@+id/List_view"
                 android:layout_width="match_parent"
-                android:layout_height="497dp"
+                android:layout_height="441dp"
                 android:listSelector="#E0F7D2">
 
             </ListView>
@@ -51,7 +51,7 @@
             <Button
                 android:id="@+id/button"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="45dp"
                 android:layout_marginBottom="8dp"
                 android:text="가입" />
 

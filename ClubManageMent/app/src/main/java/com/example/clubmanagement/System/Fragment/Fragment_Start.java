@@ -57,32 +57,31 @@ public class Fragment_Start extends AppCompatActivity implements NavigationView.
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-            /*
+
         switch (menuItem.getItemId()){
             case R.id.account:
 //                Snackbar.make(findViewById(R.id.account),"Navigation Account pressed",Snackbar.LENGTH_SHORT).show();
-                Log.d("어카운트 클릭"," 클릭됨");
+                Log.d("위에서 클릭"," 클릭됨");
                 break;
             case R.id.setting:
                 Log.d("setting 클릭"," 클릭됨");
                 Snackbar.make(findViewById(R.id.setting),"Navigation Setting pressed",Snackbar.LENGTH_SHORT).show();
                 break;
         }
-        */
+
         DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mDrawerLayout.closeDrawers();
 
         return false;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
+/*
         switch(item.getItemId()) {
             case R.id.account:
                 //Snackbar.make(toolbar, (CharSequence)"account click", -1).show();
-                // Log.d("어카운트 클릭"," 클릭됨");
+                 Log.d("어카운트 클릭"," 클릭됨");
                 break;
             //case -1000132:
             //   Snackbar.make(toolbar, (CharSequence)"Logout menu pressed", -1).show();
@@ -97,8 +96,8 @@ public class Fragment_Start extends AppCompatActivity implements NavigationView.
                 ((DrawerLayout)this.findViewById(R.id.drawerLayout)).openDrawer(Gravity.START);
                 break;
         }
+*/
         return super.onOptionsItemSelected(item);
-
     }
 
     /* 옵션 부분 */
