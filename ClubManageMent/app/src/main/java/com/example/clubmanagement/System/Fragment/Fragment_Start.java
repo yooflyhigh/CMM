@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.clubmanagement.Join.Center;
 import com.example.clubmanagement.Login.Auto_Login.SaveSharedPreference;
@@ -32,12 +33,18 @@ import java.util.List;
 public class Fragment_Start extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private BackPressCloseHandler BackPressCloseHandler = new BackPressCloseHandler(this);
     Toolbar toolbar;
-    Button Btn_logout;
+    ImageButton Btn_logout;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.frg_frgment_start);
-
+        Btn_logout = (ImageButton) findViewById(R.id.logoutbtn);
+        Btn_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onLogoutButtonClick();
+            }
+        });
         setToolbar();
         NavigationView navigationView = (NavigationView)findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
@@ -60,50 +67,35 @@ public class Fragment_Start extends AppCompatActivity implements NavigationView.
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
         switch (menuItem.getItemId()){
             case R.id.account:
-//                Snackbar.make(findViewById(R.id.account),"Navigation Account pressed",Snackbar.LENGTH_SHORT).show();
-                Log.d("위에서 클릭"," 클릭됨");
+
+                break;
+            case R.id.joined:
+                break;
+            case R.id.control:
+                break;
+            case R.id.bugreport:
                 break;
             case R.id.setting:
-                Log.d("setting 클릭"," 클릭됨");
-                Snackbar.make(findViewById(R.id.setting),"Navigation Setting pressed",Snackbar.LENGTH_SHORT).show();
+                break;
+            case R.id.logout:
+                onLogoutButtonClick();
                 break;
         }
-
         DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mDrawerLayout.closeDrawers();
 
         return false;
     }
 
+    /* 옵션 부분 */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-/*
-        switch(item.getItemId()) {
-            case R.id.account:
-                //Snackbar.make(toolbar, (CharSequence)"account click", -1).show();
-                 Log.d("어카운트 클릭"," 클릭됨");
-                break;
-            //case -1000132:
-            //   Snackbar.make(toolbar, (CharSequence)"Logout menu pressed", -1).show();
-            // break;
-            case -1000091:
-                Snackbar.make(toolbar, (CharSequence)"Search menu pressed", -1).show();
-                break;
-            case -1000055:
-                Snackbar.make(toolbar, (CharSequence)"Account menu pressed", -1).show();
-                break;
-            case android.R.id.home:
-                ((DrawerLayout)this.findViewById(R.id.drawerLayout)).openDrawer(Gravity.START);
-                break;
-        }
-*/
+        ((DrawerLayout)this.findViewById(R.id.drawerLayout)).openDrawer(Gravity.START);
         return super.onOptionsItemSelected(item);
     }
 
-    /* 옵션 부분 */
     /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -114,7 +106,7 @@ public class Fragment_Start extends AppCompatActivity implements NavigationView.
     */
 
     /* 로그아웃 버튼 */
-    public void onLogoutButtonClick(View view) {
+    public void onLogoutButtonClick() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                 this);
         alertDialogBuilder.setTitle("로그아웃");
@@ -125,7 +117,6 @@ public class Fragment_Start extends AppCompatActivity implements NavigationView.
                         new DialogInterface.OnClickListener() {
                             public void onClick(
                                     DialogInterface dialog, int id) {
-                                // 프로그램을 종료한다
                                 SaveSharedPreference.setUserName(Fragment_Start.this, "");
                                 SaveSharedPreference.setUserPass(Fragment_Start.this, "");
                                 SaveSharedPreference.setAutoLoginCheck(Fragment_Start.this,false);
@@ -136,7 +127,6 @@ public class Fragment_Start extends AppCompatActivity implements NavigationView.
                         new DialogInterface.OnClickListener() {
                             public void onClick(
                                     DialogInterface dialog, int id) {
-                                // 다이얼로그를 취소한다
                                 dialog.cancel();
                             }
                         });

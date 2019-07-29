@@ -1,39 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single">
         <item
             android:id="@+id/account"
-            android:icon="@drawable/light"
+            android:icon="@drawable/box"
             android:title="계정"
             />
         <item
-            android:id="@+id/star"
+            android:id="@+id/joined"
             android:icon="@drawable/item"
-            android:title="즐겨찾기"
+            android:title="가입된 동아리"
             />
         <item
-            android:id="@+id/cart"
+            android:id="@+id/control"
             android:icon="@drawable/one"
-            android:title="장바구니"
+            android:title="동아리 관리"
             />
-    </group>
-    <group android:checkableBehavior="single">
         <item
-            android:id="@+id/bug_report"
-            android:icon="@drawable/three"
-            android:title="버그 리포트"
+            android:id="@+id/bugreport"
+            android:icon="@drawable/one"
+            android:title="버그 게시판"
             />
         <item
             android:id="@+id/setting"
-            android:icon="@drawable/poster_sample"
+            android:icon="@drawable/one"
             android:title="설정"
             />
         <item
             android:id="@+id/logout"
-            android:icon="@drawable/video"
+            android:icon="@drawable/one"
             android:title="로그아웃"
             />
-    </group>
 </menu>
 
 
