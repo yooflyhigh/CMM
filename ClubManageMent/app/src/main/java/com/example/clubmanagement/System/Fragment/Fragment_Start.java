@@ -1,5 +1,7 @@
 package com.example.clubmanagement.System.Fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -18,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.clubmanagement.Join.Center;
 import com.example.clubmanagement.Login.Auto_Login.SaveSharedPreference;
 import com.example.clubmanagement.Login.Login_View.LoginActivity;
 import com.example.clubmanagement.System.Adapter.FragmentAdapter.Fragment_Page_Adapter;
@@ -109,12 +112,36 @@ public class Fragment_Start extends AppCompatActivity implements NavigationView.
         return true;
     }
     */
+
     /* 로그아웃 버튼 */
     public void onLogoutButtonClick(View view) {
-        SaveSharedPreference.setUserName(this, "");
-        SaveSharedPreference.setUserPass(this, "");
-        SaveSharedPreference.setAutoLoginCheck(this,false);
-        startActivity(new Intent(this, LoginActivity.class));
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                this);
+        alertDialogBuilder.setTitle("로그아웃");
+        alertDialogBuilder
+                .setMessage("로그아웃 하시겠습니까?")
+                .setCancelable(false)
+                .setPositiveButton("확인",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(
+                                    DialogInterface dialog, int id) {
+                                // 프로그램을 종료한다
+                                SaveSharedPreference.setUserName(Fragment_Start.this, "");
+                                SaveSharedPreference.setUserPass(Fragment_Start.this, "");
+                                SaveSharedPreference.setAutoLoginCheck(Fragment_Start.this,false);
+                                startActivity(new Intent(Fragment_Start.this, LoginActivity.class));
+                            }
+                        })
+                .setNegativeButton("취소",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(
+                                    DialogInterface dialog, int id) {
+                                // 다이얼로그를 취소한다
+                                dialog.cancel();
+                            }
+                        });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
     /* 프레그먼트 백버튼 리스너 */

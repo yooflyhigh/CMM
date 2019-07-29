@@ -43,7 +43,7 @@ public class JoinPopUp extends Activity implements View.OnClickListener {
                         .setNeutralButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                /* 이곳에서 db에 가입신청 전달 구현 */
+                                //TODO db에 가입신청 전달 구현
 
                                 finish();
                             }
