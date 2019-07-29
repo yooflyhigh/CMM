@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                 passwordEditText.setText(SaveSharedPreference.getUserPass(LoginActivity.this));
                 autoLogin.setChecked(true);
                 loginButton.callOnClick();
-            }
+    }
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
