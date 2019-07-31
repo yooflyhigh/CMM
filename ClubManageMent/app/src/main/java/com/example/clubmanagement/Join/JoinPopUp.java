@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.example.clubmanagement.ClubPage.Home.ClubPoster;
+import com.example.clubmanagement.DataBase.DBConnect.CNT_JoinRequest;
+import com.example.clubmanagement.Profile.UserID;
 import com.example.clubmanagement.R;
 
 public class JoinPopUp extends Activity implements View.OnClickListener {
@@ -44,13 +47,15 @@ public class JoinPopUp extends Activity implements View.OnClickListener {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //TODO db에 가입신청 전달 구현
+                                CNT_JoinRequest cn = new CNT_JoinRequest();
 
+                                cn.JoinRequest("1",UserID.UserID);
                                 finish();
                             }
                         })
                         .show(); // 팝업창 보여줌
             } catch (Exception e) {
-
+                Log.d("에러","에러발생");
             }
         } else if (view == cancel) {
             finish();

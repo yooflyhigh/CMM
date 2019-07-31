@@ -54,9 +54,9 @@ public class Center extends Fragment implements Fragment_Start.OnBackPressedList
 
         checkSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, int SpinnerNumber, long id) {
                 adapter = new Fragment_List_Adapter();
-                DataInput(position);
+                ShowList(SpinnerNumber);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -68,7 +68,7 @@ public class Center extends Fragment implements Fragment_Start.OnBackPressedList
 
         return v;
     }
-    private void DataInput(int Code) {
+    private void ShowList(int SpinnerNumber) {
         listview.setAdapter(adapter);
         HashMap<String, String> Club;
         for (int i = 0; i < Club_Item_list.size(); i++) {
@@ -83,29 +83,29 @@ public class Center extends Fragment implements Fragment_Start.OnBackPressedList
             }
 
             ClubPoster.image = new BitmapDrawable(getResources(),ImageDown.bitmap);
-            if (Club.get("CLUB_GB_CD").equals("1002") && Code == 0) {
+            if (Club.get("CLUB_GB_CD").equals("1002") && SpinnerNumber == 0) {
                 adapter.addVO(ClubPoster.image, Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
-            } else if (Club.get("CLUB_GB_CD").equals("1002") && Code == 1) {
+            } else if (Club.get("CLUB_GB_CD").equals("1002") && SpinnerNumber == 1) {
                 if (Club.get("CLUB_AT_CD").equals("2001")) {
                     adapter.addVO(ClubPoster.image, Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
                 }
-            } else if (Club.get("CLUB_GB_CD").equals("1002") && Code == 2) {
+            } else if (Club.get("CLUB_GB_CD").equals("1002") && SpinnerNumber == 2) {
                 if (Club.get("CLUB_AT_CD").equals("2002")) {
                     adapter.addVO(ClubPoster.image, Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
                 }
-            } else if (Club.get("CLUB_GB_CD").equals("1002") && Code == 3) {
+            } else if (Club.get("CLUB_GB_CD").equals("1002") && SpinnerNumber == 3) {
                 if (Club.get("CLUB_AT_CD").equals("2003")) {
                     adapter.addVO(ClubPoster.image, Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
                 }
-            } else if (Club.get("CLUB_GB_CD").equals("1002") && Code == 4) {
+            } else if (Club.get("CLUB_GB_CD").equals("1002") && SpinnerNumber == 4) {
                 if (Club.get("CLUB_AT_CD").equals("2004")) {
                     adapter.addVO(ClubPoster.image, Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
                 }
-            } else if (Club.get("CLUB_GB_CD").equals("1002") && Code == 5) {
+            } else if (Club.get("CLUB_GB_CD").equals("1002") && SpinnerNumber == 5) {
                 if (Club.get("CLUB_AT_CD").equals("2005")) {
                     adapter.addVO(ClubPoster.image, Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
                 }
-            } else if (Club.get("CLUB_GB_CD").equals("1002") && Code == 6) {
+            } else if (Club.get("CLUB_GB_CD").equals("1002") && SpinnerNumber == 6) {
                 if (Club.get("CLUB_AT_CD").equals("2006")) {
                     adapter.addVO(ClubPoster.image, Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
                 }
