@@ -45,7 +45,6 @@ public class JoinPopUp extends Activity implements View.OnClickListener {
             CNT_JoinRequest cn = new CNT_JoinRequest();
             Intent intent = getIntent();
             String CLUB_ID = intent.getExtras().getString("CLUB_ID");
-
             String result = cn.JoinRequest(CLUB_ID, UserID.UserID);
 
             if(result.equals("-1")){
@@ -72,37 +71,6 @@ public class JoinPopUp extends Activity implements View.OnClickListener {
                         })
                         .show(); // 팝업창 보여줌
             }
-                /*
-            try{
-                sleep(100);
-
-                String temp = cn.JoinRequest(CLUB_ID, UserID.UserID);
-                temp.equals("error");
-
-                new AlertDialog.Builder(this)
-                        .setTitle("가입확인")
-                        .setMessage("가입신청 되었습니다.")
-                        .setNeutralButton("확인", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                finish();
-                            }
-                        })
-                        .show(); // 팝업창 보여줌
-            }
-            catch (Exception e){
-                new AlertDialog.Builder(this)
-                        .setTitle("가입실패")
-                        .setMessage("이미 가입된 동아리 입니다.")
-                        .setNeutralButton("확인", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                finish();
-                            }
-                        })
-                        .show(); // 팝업창 보여줌
-            }
-*/
         } else if (view == cancel) {
             finish();
         }

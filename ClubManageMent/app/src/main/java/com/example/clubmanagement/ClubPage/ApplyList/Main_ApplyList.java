@@ -14,7 +14,7 @@ import com.example.clubmanagement.System.Adapter.ListViewAdapter.ApplyList_ListA
 import com.example.clubmanagement.R;
 
 import static android.app.PendingIntent.getActivity;
-
+//TODO: 가입신청관리 - > 회장 혹은 부회장이 가입요청이 온 회원들을 관리해주는 부분
 public class Main_ApplyList extends AppCompatActivity implements View.OnClickListener{
     private ListView listview ;
     private ApplyList_ListAdapter adapter;

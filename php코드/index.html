@@ -1,0 +1,27 @@
+﻿<?php
+
+$db_host = "localhost";
+
+$db_user = "root";
+
+$db_passwd = "123456";
+
+$db_name = "mysql";
+ 
+// 데이터베이스 테스트
+$mysqli = new mysqli($db_host, $db_user, $db_passwd, $db_name);
+
+if ($mysqli->connect_errno) {
+
+    die('Connection Error : '.$mysqli->connect_error);
+
+}else{
+
+    echo "<center>DB 접속 성공!!</center>";
+
+}
+
+// PHP 정보 출력
+phpinfo();
+
+?>

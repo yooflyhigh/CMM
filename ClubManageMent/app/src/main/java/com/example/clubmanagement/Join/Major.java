@@ -140,7 +140,8 @@ public class Major extends Fragment implements Fragment_Start.OnBackPressedListe
                     Intent intent = new Intent(getActivity(), JoinPopUp.class);
                     intent.putExtra("CLUB_ID",SelectedClub.getCLUB_ID());
                     startActivity(intent);
-                } else {
+                }
+                else {
                     Toast.makeText(getContext(), "동아리를 선택하세요.", Toast.LENGTH_SHORT).show();
                 }
             }
