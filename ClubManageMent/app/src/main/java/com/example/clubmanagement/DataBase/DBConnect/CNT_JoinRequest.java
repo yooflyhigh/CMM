@@ -7,17 +7,18 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
-import android.util.Log;
+import static java.lang.Thread.sleep;
 
 public class CNT_JoinRequest {
     private URL url;
-    private  String result;
+    private String result;
+
     private String readStream(InputStream in) throws IOException {
         StringBuilder jsonHtml = new StringBuilder();
         BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+
         String line = null;
         while((line = reader.readLine()) != null)
             jsonHtml.append(line);
@@ -45,6 +46,7 @@ public class CNT_JoinRequest {
                     outputStream.flush();
                     outputStream.close();
                     result = readStream(conn.getInputStream());
+
                     conn.disconnect();
                 }
                 catch (Exception e) {
@@ -52,6 +54,11 @@ public class CNT_JoinRequest {
                 }
             }
         }.start();
+        try {
+            sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return result;
     }
 }

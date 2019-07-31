@@ -73,7 +73,7 @@ public class JoinedClubList extends Fragment implements Fragment_Start.OnBackPre
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    adapter.addVO(new BitmapDrawable(getResources(), ImageDown.bitmap), Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
+                    adapter.addVO(new BitmapDrawable(getResources(), ImageDown.bitmap), Club.get("CLUB_ID"), Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
                 }
             }
         }

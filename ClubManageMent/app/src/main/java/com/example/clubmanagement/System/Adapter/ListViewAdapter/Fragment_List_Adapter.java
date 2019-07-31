@@ -35,7 +35,6 @@ public class Fragment_List_Adapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.frg_fragment_list_adapter, parent, false);
         }
-
         ImageView image = (ImageView) convertView.findViewById(R.id.img);
         TextView title = (TextView) convertView.findViewById(R.id.title);
         TextView Context = (TextView) convertView.findViewById(R.id.context);
@@ -63,13 +62,13 @@ public class Fragment_List_Adapter extends BaseAdapter {
     }
 
     // 데이터값 넣어줌
-    public void addVO(Drawable icon, String title, String desc) {
+    public void addVO(Drawable icon, String CLUB_ID, String title, String desc) {
         ListVO_Frg item = new ListVO_Frg();
 
         item.setImg(icon);
         item.setTitle(title);
-
         item.setContext(desc);
+        item.setCLUB_ID(CLUB_ID);
         listVOFrg.add(item);
     }
 }

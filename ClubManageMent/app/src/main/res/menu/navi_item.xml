@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:id="@+id/menu_01"
+        android:checkableBehavior="single">
+
         <item
             android:id="@+id/account"
             android:icon="@drawable/box"
@@ -13,23 +20,26 @@
         <item
             android:id="@+id/control"
             android:icon="@drawable/one"
-            android:title="동아리 관리"
+            android:title="가입 신청 관리"
             />
         <item
             android:id="@+id/bugreport"
             android:icon="@drawable/one"
             android:title="버그 게시판"
             />
-        <item
-            android:id="@+id/setting"
-            android:icon="@drawable/one"
-            android:title="설정"
-            />
-        <item
-            android:id="@+id/logout"
-            android:icon="@drawable/one"
-            android:title="로그아웃"
-            />
+    </group>
+        <item android:title="설정">
+                <item
+                    android:id="@+id/setting"
+                    android:icon="@drawable/one"
+                    android:title="설정"
+                    />
+                <item
+                    android:id="@+id/logout"
+                    android:icon="@drawable/one"
+                    android:title="로그아웃"
+                    />
+        </item>
 </menu>
 
 

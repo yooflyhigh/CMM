@@ -10,6 +10,8 @@ public class ListVO_Frg {
     private Drawable img;
     private String Title;
     private String context;
+    private String CLUB_ID;
+
 
     public Drawable getImg() {
         return img;
@@ -33,5 +35,13 @@ public class ListVO_Frg {
 
     public void setContext(String context) {
         this.context = context;
+    }
+
+    public String getCLUB_ID() {
+        return CLUB_ID;
+    }
+
+    public void setCLUB_ID(String CLUB_ID) {
+        this.CLUB_ID = CLUB_ID;
     }
 }

@@ -3,17 +3,21 @@ package com.example.clubmanagement.Join;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.clubmanagement.ClubPage.Home.ClubPoster;
 import com.example.clubmanagement.DataBase.DBConnect.CNT_JoinRequest;
 import com.example.clubmanagement.Profile.UserID;
 import com.example.clubmanagement.R;
+
+import static java.lang.Thread.sleep;
 
 public class JoinPopUp extends Activity implements View.OnClickListener {
     Button join; // 버튼 선언
@@ -25,11 +29,10 @@ public class JoinPopUp extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.join_popup);
 
-        //팝업 버튼 설정
         linear = (LinearLayout) findViewById(R.id.linr);
         linear.setBackground(ClubPoster.image);
 
-        join = (Button) findViewById(R.id.join); // 팝업 버튼 아이디
+        join = (Button) findViewById(R.id.join);
         join.setOnClickListener(this);
 
         cancel = (Button) findViewById(R.id.cancel);
@@ -39,24 +42,67 @@ public class JoinPopUp extends Activity implements View.OnClickListener {
     /* 가입 or 취소 버튼 클릭 시 */
     public void onClick(View view) {
         if (view == join) {
-            try {
+            CNT_JoinRequest cn = new CNT_JoinRequest();
+            Intent intent = getIntent();
+            String CLUB_ID = intent.getExtras().getString("CLUB_ID");
+
+            String result = cn.JoinRequest(CLUB_ID, UserID.UserID);
+
+            if(result.equals("-1")){
+                new AlertDialog.Builder(this)
+                        .setTitle("가입실패")
+                        .setMessage("이미 가입된 동아리 입니다.")
+                        .setNeutralButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        })
+                        .show(); // 팝업창 보여줌
+            }
+            else{
                 new AlertDialog.Builder(this)
                         .setTitle("가입확인")
                         .setMessage("가입신청 되었습니다.")
                         .setNeutralButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                //TODO db에 가입신청 전달 구현
-                                CNT_JoinRequest cn = new CNT_JoinRequest();
-
-                                cn.JoinRequest("1",UserID.UserID);
                                 finish();
                             }
                         })
                         .show(); // 팝업창 보여줌
-            } catch (Exception e) {
-                Log.d("에러","에러발생");
             }
+                /*
+            try{
+                sleep(100);
+
+                String temp = cn.JoinRequest(CLUB_ID, UserID.UserID);
+                temp.equals("error");
+
+                new AlertDialog.Builder(this)
+                        .setTitle("가입확인")
+                        .setMessage("가입신청 되었습니다.")
+                        .setNeutralButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        })
+                        .show(); // 팝업창 보여줌
+            }
+            catch (Exception e){
+                new AlertDialog.Builder(this)
+                        .setTitle("가입실패")
+                        .setMessage("이미 가입된 동아리 입니다.")
+                        .setNeutralButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        })
+                        .show(); // 팝업창 보여줌
+            }
+*/
         } else if (view == cancel) {
             finish();
         }

@@ -91,30 +91,30 @@ public class Major extends Fragment implements Fragment_Start.OnBackPressedListe
 
             ClubPoster.image = new BitmapDrawable(getResources(),ImageDown.bitmap);
             if (Club.get("CLUB_GB_CD").equals("1001") && SpinnerNumber == 0) {
-                adapter.addVO(ClubPoster.image, Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
+                adapter.addVO(ClubPoster.image, Club.get("CLUB_ID"), Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
             } else if (Club.get("CLUB_GB_CD").equals("1001") && SpinnerNumber == 1) {
                 if (Club.get("CLUB_AT_CD").equals("2001")) {
-                    adapter.addVO(ClubPoster.image, Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
+                    adapter.addVO(ClubPoster.image, Club.get("CLUB_ID"), Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
                 }
             } else if (Club.get("CLUB_GB_CD").equals("1001") && SpinnerNumber == 2) {
                 if (Club.get("CLUB_AT_CD").equals("2002")) {
-                    adapter.addVO(ClubPoster.image, Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
+                    adapter.addVO(ClubPoster.image, Club.get("CLUB_ID"), Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
                 }
             } else if (Club.get("CLUB_GB_CD").equals("1001") && SpinnerNumber == 3) {
                 if (Club.get("CLUB_AT_CD").equals("2003")) {
-                    adapter.addVO(ClubPoster.image, Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
+                    adapter.addVO(ClubPoster.image, Club.get("CLUB_ID"), Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
                 }
             } else if (Club.get("CLUB_GB_CD").equals("1001") && SpinnerNumber == 4) {
                 if (Club.get("CLUB_AT_CD").equals("2004")) {
-                    adapter.addVO(ClubPoster.image, Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
+                    adapter.addVO(ClubPoster.image, Club.get("CLUB_ID"), Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
                 }
             } else if (Club.get("CLUB_GB_CD").equals("1001") && SpinnerNumber == 5) {
                 if (Club.get("CLUB_AT_CD").equals("2005")) {
-                    adapter.addVO(ClubPoster.image, Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
+                    adapter.addVO(ClubPoster.image, Club.get("CLUB_ID"), Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
                 }
             } else if (Club.get("CLUB_GB_CD").equals("1001") && SpinnerNumber == 6) {
                 if (Club.get("CLUB_AT_CD").equals("2006")) {
-                    adapter.addVO(ClubPoster.image, Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
+                    adapter.addVO(ClubPoster.image, Club.get("CLUB_ID"), Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
                 }
             }
         }
@@ -134,10 +134,12 @@ public class Major extends Fragment implements Fragment_Start.OnBackPressedListe
             @Override
             public void onClick(View view) {
                 if (Pos < listview.getCount()) {
-                    ListVO_Frg Vo = (ListVO_Frg) (listview.getAdapter().getItem(Pos));
-                    ClubPoster.image = (BitmapDrawable) Vo.getImg();
+                    ListVO_Frg SelectedClub = (ListVO_Frg) (listview.getAdapter().getItem(Pos));
+                    ClubPoster.image = (BitmapDrawable) SelectedClub.getImg();
+                    SelectedClub.getCLUB_ID();
                     Intent intent = new Intent(getActivity(), JoinPopUp.class);
-                    startActivityForResult(intent, 1);
+                    intent.putExtra("CLUB_ID",SelectedClub.getCLUB_ID());
+                    startActivity(intent);
                 } else {
                     Toast.makeText(getContext(), "동아리를 선택하세요.", Toast.LENGTH_SHORT).show();
                 }
