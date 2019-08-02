@@ -49,15 +49,15 @@ public class JoinPopUp extends Activity implements View.OnClickListener {
 
             if(result.equals("-1")){
                 new AlertDialog.Builder(this)
-                        .setTitle("가입실패")
-                        .setMessage("이미 가입된 동아리 입니다.")
+                        .setTitle("신청실패")
+                        .setMessage("이미 신청하셨습니다.")
                         .setNeutralButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 finish();
                             }
                         })
-                        .show(); // 팝업창 보여줌
+                        .show();
             }
             else{
                 new AlertDialog.Builder(this)
@@ -69,7 +69,7 @@ public class JoinPopUp extends Activity implements View.OnClickListener {
                                 finish();
                             }
                         })
-                        .show(); // 팝업창 보여줌
+                        .show();
             }
         } else if (view == cancel) {
             finish();

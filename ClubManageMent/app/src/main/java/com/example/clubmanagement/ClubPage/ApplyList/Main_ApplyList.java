@@ -2,6 +2,7 @@ package com.example.clubmanagement.ClubPage.ApplyList;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,9 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.clubmanagement.DataBase.DBConnect.CNT_JoinRequest;
+import com.example.clubmanagement.DataBase.DBConnect.CNT_JoinResponse;
+import com.example.clubmanagement.Profile.UserID;
 import com.example.clubmanagement.System.Adapter.ListViewAdapter.ApplyList_ListAdapter;
 import com.example.clubmanagement.R;
 
@@ -57,28 +61,38 @@ public class Main_ApplyList extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         if(v == Deny) {
+            CNT_JoinResponse cn = new CNT_JoinResponse();
+            Intent intent = getIntent();
+            String CLUB_ID = intent.getExtras().getString("CLUB_ID");
+            String result = cn.CNT_JoinResponse(CLUB_ID, UserID.UserID, "2");
+
             new AlertDialog.Builder(Main_ApplyList.this)
                     .setTitle("거절확인")
-                    .setMessage("거절되었습니다.")
+                    .setMessage("거절 되었습니다.")
                     .setNeutralButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
+                            //TODO : 거절 시 이미지 변경 멤버리스트에 추가
                         }
                     })
-                    .show(); // 팝업창 보여줌
+                    .show();
         }
         else if(v == Accept){
+            CNT_JoinResponse cn = new CNT_JoinResponse();
+            Intent intent = getIntent();
+            String CLUB_ID = intent.getExtras().getString("CLUB_ID");
+            String result = cn.CNT_JoinResponse(CLUB_ID, UserID.UserID, "1");
+
             new AlertDialog.Builder(Main_ApplyList.this)
                 .setTitle("가입확인")
-                .setMessage("가입승인 되었습니다.")
+                .setMessage("승인 되었습니다.")
                 .setNeutralButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
                     }
                 })
-            .show(); // 팝업창 보여줌
+            .show();
         }
     }
 }

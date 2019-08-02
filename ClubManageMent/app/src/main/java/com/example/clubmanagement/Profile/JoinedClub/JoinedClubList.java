@@ -63,17 +63,20 @@ public class JoinedClubList extends Fragment implements Fragment_Start.OnBackPre
         for (int i = 0; i < Club_Member_Item_list.size(); i++) {
             Member = Club_Member_Item_list.get(i);
             if (Member.get("STUDENT_ID").equals(UserID.UserID)) {
-                Club = Club_Item_list.get(i);
-                if (Member.get("CLUB_ID").equals(Club.get("CLUB_ID"))) {
-                    String url = Club.get("INTRO_FILE_NM");
-                    ImageDown = new CNT_Image_File(url);
-                    ImageDown.run();
-                    try {
-                        sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                for(int j = 0; j < Club_Item_list.size();j++) {
+                    Club = Club_Item_list.get(j);
+                    if (Member.get("CLUB_ID").equals(Club.get("CLUB_ID")) && Member.get("JOIN_CD").equals("1")) {
+                        String url = Club.get("INTRO_FILE_NM");
+                        ImageDown = new CNT_Image_File(url);
+                        ImageDown.run();
+                        try {
+                            sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        adapter.addVO(new BitmapDrawable(getResources(), ImageDown.bitmap), Club.get("CLUB_ID"), Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
+                        break;
                     }
-                    adapter.addVO(new BitmapDrawable(getResources(), ImageDown.bitmap), Club.get("CLUB_ID"), Club.get("CLUB_NM"), Club.get("INTRO_CONT"));
                 }
             }
         }

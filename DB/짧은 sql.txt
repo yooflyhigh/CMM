@@ -1,0 +1,13 @@
+DELEte from club_member where STUDENT_ID = '20169874';
+
+DELEte from club_member where STUDENT_ID = '20145144' and NM = '모모모';
+
+$query = "insert into CLUB_MEMBER value('1','20145144','모모모','빅데이터','4','1','004001','01012341234','123456','춘천','OK','1234@naver.com','20190512','550808','005001','3',' ',' ','20190512',' ',' ','20190512');";
+
+update club_member 
+	set JOIN_CD = '1' 
+	where STUDENT_ID = '20145144' and JOIN_CD = '3';
+	
+	update club
+	set INTRO_FILE_PATH = 'http://210.115.230.212/clubicon/아이돌제작소.png' 
+	where CLUB_ID = '1';
