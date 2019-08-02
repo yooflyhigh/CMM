@@ -12,7 +12,7 @@ import java.net.URL;
 
 import static java.lang.Thread.sleep;
 
-public class CNT_JoinResponse {
+public class CNT_JoinResponseDelete {
     private URL url;
     private String result;
 
@@ -28,14 +28,14 @@ public class CNT_JoinResponse {
         return jsonHtml.toString();
     }
 
-    public String CNT_JoinResponse(final String CLUB_ID,final String STUDENT_ID, final String Order) {
+    public String CNT_JoinResponse(final String CLUB_ID,final String STUDENT_ID, final String NM) {
         new Thread() {
             public void run() {
                 try {
-                    url = new URL("http://210.115.230.212/Member_Join_Response.php");
+                    url = new URL("http://210.115.230.212/Member_Join_Response_Delete.php");
                     String postData = "CLUB_ID=" + CLUB_ID + "&"
                             + "STUDENT_ID=" + STUDENT_ID + "&"
-                            + "Order=" + Order;
+                            + "NM=" + NM;
 
                     HttpURLConnection conn = (HttpURLConnection)url.openConnection();
                     conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");

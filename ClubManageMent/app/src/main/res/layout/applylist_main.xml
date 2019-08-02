@@ -36,15 +36,26 @@
                 android:orientation="horizontal">
 
                 <Button
+                    android:id="@+id/Getout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="퇴출" />
+
+                <Button
                     android:id="@+id/deny"
-                    android:layout_width="206dp"
-                    android:layout_height="68dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
                     android:text="거절" />
 
                 <Button
                     android:id="@+id/accept"
-                    android:layout_width="206dp"
-                    android:layout_height="68dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
                     android:text="승인" />
             </LinearLayout>
 

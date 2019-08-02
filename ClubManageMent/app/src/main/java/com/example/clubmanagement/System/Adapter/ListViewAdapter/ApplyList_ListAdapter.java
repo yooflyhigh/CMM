@@ -36,15 +36,23 @@ public class ApplyList_ListAdapter extends BaseAdapter {
         }
 
         ImageView Apply_img = (ImageView) convertView.findViewById(R.id.Apply_img);
-        TextView Apply_name = (TextView) convertView.findViewById(R.id.Apply_name);
-        TextView Apply_major = (TextView) convertView.findViewById(R.id.Apply_major);
+        TextView Apply_Major = (TextView) convertView.findViewById(R.id.Apply_Major);
+        TextView Apply_Student_ID = (TextView) convertView.findViewById(R.id.Apply_Student_ID);
+        TextView Apply_Grade = (TextView) convertView.findViewById(R.id.Apply_Grade);
+        TextView Apply_NM = (TextView) convertView.findViewById(R.id.Apply_NM);
+        TextView Apply_Gender = (TextView) convertView.findViewById(R.id.Apply_Gender);
+        TextView Apply_Phone_No = (TextView) convertView.findViewById(R.id.Apply_Phone_No);
 
         final ListVO_Apply listViewItem = listVO_Apply.get(position);
 
         // 아이템 내 각 위젯에 데이터 반영
         Apply_img.setImageDrawable(listViewItem.getApply_Img());
-        Apply_name.setText(listViewItem.getApply_name());
-        Apply_major.setText(listViewItem.getApply_major());
+        Apply_Major.setText(listViewItem.getMAJOR());
+        Apply_Student_ID.setText(listViewItem.getSTUDENT_ID());
+        Apply_Grade.setText(listViewItem.getGRADE());
+        Apply_NM.setText(listViewItem.getNM());
+        Apply_Gender.setText(listViewItem.getGENDER_CD());
+        Apply_Phone_No.setText(listViewItem.getPHONE_NO());
 
         return convertView;
     }
@@ -60,12 +68,16 @@ public class ApplyList_ListAdapter extends BaseAdapter {
     }
 
     // 데이터값 넣어줌
-    public void addVO(Drawable Apply_Img, String Apply_name, String setApply_major) {
+    public void addVO(Drawable Apply_Img, String Apply_Major, String Apply_Student_ID, String Apply_Grade,String Apply_NM,String Apply_Gender,String Apply_Phone_No) {
         ListVO_Apply item = new ListVO_Apply();
 
         item.setApply_Img(Apply_Img);
-        item.setApply_name(Apply_name);
-        item.setApply_major(setApply_major);
+        item.setMAJOR(Apply_Major);
+        item.setSTUDENT_ID(Apply_Student_ID);
+        item.setGRADE(Apply_Grade);
+        item.setNM(Apply_NM);
+        item.setGENDER_CD(Apply_Gender);
+        item.setPHONE_NO(Apply_Phone_No);
 
         listVO_Apply.add(item);
     }

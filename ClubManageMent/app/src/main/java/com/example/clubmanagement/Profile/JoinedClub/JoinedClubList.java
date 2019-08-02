@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.clubmanagement.ClubPage.Home.Main_HomePage;
+import com.example.clubmanagement.Join.JoinPopUp;
 import com.example.clubmanagement.System.Adapter.ListViewAdapter.Fragment_List_Adapter;
 import com.example.clubmanagement.ClubPage.Home.ClubPoster;
 import com.example.clubmanagement.System.Fragment.Fragment_Start;
@@ -52,12 +53,6 @@ public class JoinedClubList extends Fragment implements Fragment_Start.OnBackPre
     }
 
     private void ShowList() {
-        try {
-            sleep(200);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        listview.setAdapter(adapter);
         HashMap<String, String> Member;
         HashMap<String, String> Club;
         for (int i = 0; i < Club_Member_Item_list.size(); i++) {
@@ -84,9 +79,11 @@ public class JoinedClubList extends Fragment implements Fragment_Start.OnBackPre
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ListVO_Frg Vo = (ListVO_Frg) (listview.getAdapter().getItem(position));
-                ClubPoster.image = (BitmapDrawable) Vo.getImg();
-                startActivity(new Intent(getActivity(), Main_HomePage.class));
+                ListVO_Frg SelectedClub = (ListVO_Frg) (listview.getAdapter().getItem(position));
+                ClubPoster.image = (BitmapDrawable) SelectedClub.getImg();
+                Intent intent = new Intent(getActivity(), Main_HomePage.class);
+                intent.putExtra("CLUB_ID",SelectedClub.getCLUB_ID());
+                startActivity(intent);
             }
         });
     }

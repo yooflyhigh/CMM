@@ -10,42 +10,52 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import com.example.clubmanagement.DataBase.DBConnect.CNT_JoinRequest;
 import com.example.clubmanagement.DataBase.DBConnect.CNT_JoinResponse;
-import com.example.clubmanagement.Profile.UserID;
+import com.example.clubmanagement.DataBase.DBConnect.CNT_JoinResponseDelete;
+import com.example.clubmanagement.DataBase.DBRefresh;
 import com.example.clubmanagement.System.Adapter.ListViewAdapter.ApplyList_ListAdapter;
 import com.example.clubmanagement.R;
+import com.example.clubmanagement.System.ListVO.ListVO_Apply;
 
-import static android.app.PendingIntent.getActivity;
-//TODO: 가입신청관리 - > 회장 혹은 부회장이 가입요청이 온 회원들을 관리해주는 부분
+import java.util.HashMap;
+
+import static com.example.clubmanagement.DataBase.DataPool.Member.Club_Member_Item_list;
+import static java.lang.Thread.sleep;
+
 public class Main_ApplyList extends AppCompatActivity implements View.OnClickListener{
     private ListView listview ;
     private ApplyList_ListAdapter adapter;
-    private int[] Apply_Img= { R.drawable.check,R.drawable.check,R.drawable.box,R.drawable.box,R.drawable.check,R.drawable.check,R.drawable.x,R.drawable.x,R.drawable.box,R.drawable.check,R.drawable.box};
-    private String[] Apply_name= {"권기호","정호준","김성태", "흑운장", "보겸", "아이서", "김균모", "유지형", "정지민", "이편한", "아디소"};
-    private String[] Apply_major = {"빅데이터","스마트IOT","일본학과","법학과","바이오메디컬","영어영문학곽","빅데이터","콘텐츠IT","빅데이터","콘텐츠IT","빅데이터"};
+    private int[] Apply_Img= {R.drawable.box, R.drawable.x,R.drawable.check};
+
     int Pos = Integer.MAX_VALUE;
+    Button Getout;
     Button Deny;
     Button Accept;
+    private String CLUB_ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.applylist_main);
+        Intent intent = getIntent();
+        CLUB_ID = intent.getExtras().getString("CLUB_ID");
 
-        //변수 초기화
-        adapter = new ApplyList_ListAdapter();
-        listview = (ListView) findViewById(R.id.Apply_ListView);
-
-        //어뎁터 할당
-        listview.setAdapter(adapter);
-
-        //adapter를 통한 값 전달
-        for(int i=0; i<Apply_Img.length;i++){
-            adapter.addVO(ContextCompat.getDrawable(this,Apply_Img[i]),Apply_name[i],Apply_major[i]);
+        try {
+            DBRefresh.Refresh();
+            sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
+        adapter = new ApplyList_ListAdapter();
+        listview = (ListView) findViewById(R.id.Apply_ListView);
+        listview.setAdapter(adapter);
+
+        ShowList();
+        Getout = (Button)findViewById(R.id.Getout) ;
+        Getout.setOnClickListener(this);
         Deny = (Button)findViewById(R.id.deny);
         Deny.setOnClickListener(this);
         Accept = (Button) findViewById(R.id.accept);
@@ -56,44 +66,90 @@ public class Main_ApplyList extends AppCompatActivity implements View.OnClickLis
                 Pos = position;
             }
         });
+
+    }
+
+    private void ShowList() {
+        HashMap<String, String> Member;
+        for(int i=0; i<Club_Member_Item_list.size();i++){
+            Member = Club_Member_Item_list.get(i);
+            if (Member.get("CLUB_ID").equals(CLUB_ID) && Member.get("JOIN_CD").equals("2")) {
+                adapter.addVO(ContextCompat.getDrawable(this,Apply_Img[0]), Member.get("MAJOR"),Member.get("STUDENT_ID"),Member.get("GRADE"),Member.get("NM"),Member.get("GENDER_CD"),Member.get("PHONE_NO"));
+
+            }
+            if (Member.get("CLUB_ID").equals(CLUB_ID) && Member.get("JOIN_CD").equals("3")) {
+                adapter.addVO(ContextCompat.getDrawable(this,Apply_Img[1]), Member.get("MAJOR"),Member.get("STUDENT_ID"),Member.get("GRADE"),Member.get("NM"),Member.get("GENDER_CD"),Member.get("PHONE_NO"));
+            }
+        }
     }
 
     @Override
     public void onClick(View v) {
-        if(v == Deny) {
-            CNT_JoinResponse cn = new CNT_JoinResponse();
-            Intent intent = getIntent();
-            String CLUB_ID = intent.getExtras().getString("CLUB_ID");
-            String result = cn.CNT_JoinResponse(CLUB_ID, UserID.UserID, "2");
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Pos = position;
+            }
+        });
+        if(Pos < listview.getCount()) {
+            if(v == Getout){
+                final ListVO_Apply SelectedID = (ListVO_Apply)(listview.getAdapter().getItem(Pos));
+                CNT_JoinResponseDelete cn = new CNT_JoinResponseDelete();
+                cn.CNT_JoinResponse(CLUB_ID, SelectedID.getSTUDENT_ID(), SelectedID.getNM());
 
-            new AlertDialog.Builder(Main_ApplyList.this)
-                    .setTitle("거절확인")
-                    .setMessage("거절 되었습니다.")
-                    .setNeutralButton("확인", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //TODO : 거절 시 이미지 변경 멤버리스트에 추가
-                        }
-                    })
-                    .show();
+                new AlertDialog.Builder(Main_ApplyList.this)
+                        .setTitle("퇴출확인")
+                        .setMessage("퇴출 되었습니다.")
+                        .setNeutralButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                SelectedID.setApply_Img(ContextCompat.getDrawable(Main_ApplyList.this,Apply_Img[1]));
+                                adapter.notifyDataSetChanged();
+                            }
+                        })
+                        .show();
+            }
+            else if(v == Deny) {
+                final ListVO_Apply SelectedID = (ListVO_Apply)(listview.getAdapter().getItem(Pos));
+                CNT_JoinResponse cn = new CNT_JoinResponse();
+                cn.CNT_JoinResponse(CLUB_ID, SelectedID.getSTUDENT_ID(), "2");
+
+                new AlertDialog.Builder(Main_ApplyList.this)
+                        .setTitle("거절확인")
+                        .setMessage("거절 되었습니다.")
+                        .setNeutralButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                SelectedID.setApply_Img(ContextCompat.getDrawable(Main_ApplyList.this,Apply_Img[0]));
+                                adapter.notifyDataSetChanged();
+
+                            }
+                        })
+                        .show();
+            }
+
+            else if(v == Accept){
+                final ListVO_Apply SelectedID = (ListVO_Apply)(listview.getAdapter().getItem(Pos));
+                CNT_JoinResponse cn = new CNT_JoinResponse();
+                cn.CNT_JoinResponse(CLUB_ID, SelectedID.getSTUDENT_ID(), "1");
+
+                new AlertDialog.Builder(Main_ApplyList.this)
+                        .setTitle("가입확인")
+                        .setMessage("승인 되었습니다.")
+                        .setNeutralButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                SelectedID.setApply_Img(ContextCompat.getDrawable(Main_ApplyList.this,Apply_Img[2]));
+                                adapter.notifyDataSetChanged();
+                            }
+                        })
+                        .show();
+            }
         }
-        else if(v == Accept){
-            CNT_JoinResponse cn = new CNT_JoinResponse();
-            Intent intent = getIntent();
-            String CLUB_ID = intent.getExtras().getString("CLUB_ID");
-            String result = cn.CNT_JoinResponse(CLUB_ID, UserID.UserID, "1");
-
-            new AlertDialog.Builder(Main_ApplyList.this)
-                .setTitle("가입확인")
-                .setMessage("승인 되었습니다.")
-                .setNeutralButton("확인", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                })
-            .show();
+        else{
+            Toast.makeText(this,"대상을 선택하세요.", Toast.LENGTH_SHORT).show();
         }
+
     }
 }
 

@@ -5,19 +5,16 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.example.clubmanagement.ClubPage.Home.ClubPoster;
 import com.example.clubmanagement.DataBase.DBConnect.CNT_JoinRequest;
+import com.example.clubmanagement.DataBase.DBRefresh;
 import com.example.clubmanagement.Profile.UserID;
 import com.example.clubmanagement.R;
-
-import static java.lang.Thread.sleep;
 
 public class JoinPopUp extends Activity implements View.OnClickListener {
     Button join; // 버튼 선언
@@ -60,6 +57,7 @@ public class JoinPopUp extends Activity implements View.OnClickListener {
                         .show();
             }
             else{
+                DBRefresh.Refresh();
                 new AlertDialog.Builder(this)
                         .setTitle("가입확인")
                         .setMessage("가입신청 되었습니다.")

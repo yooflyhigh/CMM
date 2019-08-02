@@ -22,14 +22,18 @@ public class Main_HomePage extends AppCompatActivity {
     Button button4;
     Button button5;
     Button button6;
-
+    String CLUB_ID;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homepage_main);
+        Intent intent = getIntent();
+        CLUB_ID = intent.getExtras().getString("CLUB_ID");
+
         ImageView ClubImage = (ImageView) findViewById(R.id.imageView);
         ClubImage.setImageBitmap(ClubPoster.image.getBitmap());
 
-        button1 = (Button) findViewById(R.id.button1);
+
+        button1 = (Button) findViewById(R.id.MemberList);
         button1.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,15 +41,17 @@ public class Main_HomePage extends AppCompatActivity {
             }
         });
 
-        button2 = (Button) findViewById(R.id.button2);
+        button2 = (Button) findViewById(R.id.ApplyList);
         button2.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Main_HomePage.this, Main_ApplyList.class));
+                Intent intent = new Intent(Main_HomePage.this, Main_ApplyList.class);
+                intent.putExtra("CLUB_ID", CLUB_ID);
+                startActivity(intent);
             }
         });
 
-        button3 = (Button) findViewById(R.id.button3);
+        button3 = (Button) findViewById(R.id.ItemList);
         button3.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +59,7 @@ public class Main_HomePage extends AppCompatActivity {
             }
         });
 
-        button4 = (Button) findViewById(R.id.button4);
+        button4 = (Button) findViewById(R.id.RestaurantList);
         button4.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,20 +67,5 @@ public class Main_HomePage extends AppCompatActivity {
             }
         });
 
-        button5 = (Button) findViewById(R.id.button5);
-        button5.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //startActivity(new Intent(Main_HomePage.this, JoinPopUp.class));
-            }
-        });
-
-        button6 = (Button) findViewById(R.id.button6);
-        button6.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //startActivity(new Intent(Main_HomePage.this, JoinPopUp.class));
-            }
-        });
     }
 }

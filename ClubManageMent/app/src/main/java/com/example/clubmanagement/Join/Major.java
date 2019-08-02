@@ -136,7 +136,6 @@ public class Major extends Fragment implements Fragment_Start.OnBackPressedListe
                 if (Pos < listview.getCount()) {
                     ListVO_Frg SelectedClub = (ListVO_Frg) (listview.getAdapter().getItem(Pos));
                     ClubPoster.image = (BitmapDrawable) SelectedClub.getImg();
-                    SelectedClub.getCLUB_ID();
                     Intent intent = new Intent(getActivity(), JoinPopUp.class);
                     intent.putExtra("CLUB_ID",SelectedClub.getCLUB_ID());
                     startActivity(intent);

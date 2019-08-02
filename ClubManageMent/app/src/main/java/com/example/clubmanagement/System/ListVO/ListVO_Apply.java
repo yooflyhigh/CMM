@@ -3,6 +3,14 @@ package com.example.clubmanagement.System.ListVO;
 import android.graphics.drawable.Drawable;
 
 public class ListVO_Apply {
+    private Drawable Apply_Img;
+    private String NM;
+    private String STUDENT_ID;
+    private String MAJOR;
+    private String GRADE;
+    private String GENDER_CD;
+    private String PHONE_NO;
+
     public Drawable getApply_Img() {
         return Apply_Img;
     }
@@ -11,23 +19,52 @@ public class ListVO_Apply {
         Apply_Img = apply_Img;
     }
 
-    public String getApply_name() {
-        return Apply_name;
+    public String getNM() {
+        return NM;
     }
 
-    public void setApply_name(String apply_name) {
-        Apply_name = apply_name;
+    public void setNM(String NM) {
+        this.NM = NM;
     }
 
-    public String getApply_major() {
-        return Apply_major;
+    public String getSTUDENT_ID() {
+        return STUDENT_ID;
     }
 
-    public void setApply_major(String apply_major) {
-        Apply_major = apply_major;
+    public void setSTUDENT_ID(String STUDENT_ID) {
+        this.STUDENT_ID = STUDENT_ID;
     }
 
-    private Drawable Apply_Img;
-    private String Apply_name;
-    private String Apply_major;
+    public String getMAJOR() {
+        return MAJOR;
+    }
+
+    public void setMAJOR(String MAJOR) {
+        this.MAJOR = MAJOR;
+    }
+
+    public String getGRADE() {
+        return GRADE;
+    }
+
+    public void setGRADE(String GRADE) {
+        this.GRADE = GRADE;
+    }
+
+    public String getGENDER_CD() {
+        return GENDER_CD;
+    }
+
+    public void setGENDER_CD(String GENDER_CD) {
+        this.GENDER_CD = GENDER_CD;
+    }
+
+    public String getPHONE_NO() {
+        return PHONE_NO;
+    }
+
+    public void setPHONE_NO(String PHONE_NO) {
+        this.PHONE_NO = PHONE_NO;
+    }
+
 }

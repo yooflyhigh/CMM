@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.clubmanagement.DataBase.DBRefresh;
 import com.example.clubmanagement.DataBase.DataPool.Club;
 import com.example.clubmanagement.DataBase.DataPool.Member;
 import com.example.clubmanagement.DataBase.DataPool.Restaurant;
@@ -19,10 +20,7 @@ public class Main_Splash extends Activity {
         super.onCreate(savedInstanceState);
 
         try{
-            new Student();
-            new Club();
-            new Member();
-            new Restaurant();
+            DBRefresh.Refresh();
             sleep(1000);
         }
         catch (InterruptedException e){
